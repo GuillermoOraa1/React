@@ -1,0 +1,34 @@
+{
+  "name": "proyectowishlist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "lint": "eslint --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlvYuste/react-course-wishlist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlvYuste/react-course-wishlist/issues"
+  },
+  "homepage": "https://github.com/AlvYuste/react-course-wishlist#readme",
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "eslint-config-airbnb": "^19.0.4",
+    "parcel-bundler": "^1.12.5",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3"
+  }
+}
