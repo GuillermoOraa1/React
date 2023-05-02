@@ -1,0 +1,34 @@
+{
+  "name": "proyectosreact",
+  "version": "1.0.0",
+  "description": "web scrapping",
+  "main": "index.js",
+  "scripts": {
+    "test": "startdev test",
+    "start": "node image-scrapper.js",
+    "startdev": "nodemon image-scrapper.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuillermoOraa1/React.git"
+  },
+  "keywords": [
+    "web",
+    "scrapping"
+  ],
+  "author": "Guillermo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GuillermoOraa1/React/issues"
+  },
+  "homepage": "https://github.com/GuillermoOraa1/React#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsdom": "^21.1.1",
+    "puppeteer": "^19.11.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
