@@ -3,6 +3,7 @@ import L from 'leaflet';
 import { MapContainer, TileLayer,Marker, Popup, useMap, GeoJSON, ZoomControl } from 'react-leaflet';
 import countries_geojson from './docs/countries.geo.json';
 import data from './docs/countries-list.json';
+import IUCNlogo from "../../assets/images/IUCN_Red_List-2.png";
 import './Map.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -12,15 +13,24 @@ Bounds = L.latLngBounds(SouthEast,NorthWest);
 
 var regionsGroups=L.featureGroup([]);
 var countryGroups=L.featureGroup([]);
+
+var mammaliaGroup=L.featureGroup([]);
+var reptiliaGroup=L.featureGroup([]);
+var insectaGroup=L.featureGroup([]);
+var amphibiaGroup=L.featureGroup([]);
+var birdGroup=L.featureGroup([]);
+var fishGroup=L.featureGroup([]);
+
 var paisSeleccionado=null;
 var zoom1;
+var nivelDeAmenaza="CR";
 
 
 
 const RefMap = () => {
     const {results,paises}=data;
 
-    function cargarSelectPaises(identificadorRegion){
+    const cargarSelectPaises=(identificadorRegion)=>{
       var selectPaises=document.getElementById("select-pais-id");
       const {paises}=data;
       paises.forEach(pais => {
@@ -32,6 +42,69 @@ const RefMap = () => {
         }
       });
     } 
+
+    const consultarEspeciespais = async(texto)=>{
+      const mySet1 = new Set();
+      var url="http://apiv3.iucnredlist.org/api/v3/country/getspecies/"+texto+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
+      const funcion=await fetch(url)
+          .then((response) => response.json())
+          .then((data) => { 
+          const {result}=data;
+          result.map((registro)=>{
+              if(registro.category==nivelDeAmenaza) {
+                  mySet1.add("http://apiv3.iucnredlist.org/api/v3/species/id/"+registro.taxonid+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee");
+              };
+
+          });
+      }).catch(error=>{console.log(error)});
+
+      return mySet1;
+    }
+
+    const consultarDatosEspecies= async(rutas)=>{
+        var respuesta=[];
+        for (const ruta of rutas) {
+            const registro=await fetchDataBySpecie(ruta);
+            if(registro!==null){
+                //console.log(registro);
+                //console.log("xxx4");
+                respuesta.push(registro);
+            }
+        }
+        return respuesta;
+    }
+
+    const fetchDataBySpecie =async(url)=>{
+        var registro=null;
+        await fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            const {result}=data;
+            if(result[0].class==="MAMMALIA" || result[0].class==="AMPHIBIA" || 
+            result[0].class==="REPTILIA" || result[0].class==="INSECTA" ||
+            result[0].class==="AVES" || result[0].class==="ACTINOPTERYGII") {
+                /* if (result[0].scientific_name !=null){
+                    nombrecientifico=result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0]
+                }else {nombrecientifico="";} */
+                var nombrecomun="";
+                if (result[0].main_common_name !=null){
+                    nombrecomun=result[0].main_common_name;
+                }else {nombrecomun=result[0].scientific_name;}
+
+                registro={taxonid:result[0].taxonid,clase:result[0].class,nombreComun:nombrecomun,
+                    nombreCientifico:result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0],
+                    poblacion:result[0].population_trend,nombreCientificoTexto:result[0].scientific_name,
+                    assementDate:result[0].assessment_date};
+            }
+            
+
+        }).catch(error=>{console.log(error)}); 
+        return registro;
+    }
+
+    function clicSobreImagen(codigoAnimal){
+        alert("El codigo del animal es "+codigoAnimal);
+    }
 
     
     //CREAMOS LA VARIABLE QUE HACE REFERENCIA AL MAPA
@@ -45,6 +118,7 @@ const RefMap = () => {
     
     useEffect(() => {
         if (omap) {
+
               //METEMOS LOS DATOS DEL GEOJSON
             var fronteras=L.geoJSON(countries_geojson,{
               style: function (feature) {
@@ -53,9 +127,6 @@ const RefMap = () => {
               }
             });
             fronteras.addTo(omap);
-    
-            
-
 
             //RELLENAMOS EL SELECT DE LAS REGIONES Y LES ASIGNAMOS ACCIONES
             var selectRegiones=document.getElementById("select-region-id");
@@ -97,7 +168,7 @@ const RefMap = () => {
                   omap.flyTo([pais.coordinates[0],pais.coordinates[1]],pais.zoom);
                   //mostrarAnimalClassControl(false);
                   paisSeleccionado=pais;
-                  //fetchDataByCountry (pais);                
+                  fetchDataByCountry (pais);                
                   omap.on('zoomend', function() {
                       if(omap.getZoom() === pais.zoom) {
                           zoom1=pais.zoom;
@@ -112,6 +183,81 @@ const RefMap = () => {
               });
               return null;
             });
+
+            //HACEMOS QUE CADA VEZ QUE SE SELECCIONE UN PAIS SE MUESTREN SUS ANIMALES
+            const fetchDataByCountry = (pais)=>{
+              var codigoPais=pais.isocode;
+              consultarEspeciespais(codigoPais)
+              .then((especiesPais)=>{
+                  //console.log("xxx3");
+                  consultarDatosEspecies(especiesPais)
+                  .then((response)=>{
+                      var datosEspecie=response; //ESTA ES LA RESPUESTA CON LOS DATOS DE LAS ESPECIES DEL PAIS
+                      //console.log(datosEspecie);
+                      let lat=pais.coordinates[0];
+                      let long=pais.coordinates[1];
+                      var point1 = omap.latLngToLayerPoint([lat, long]);
+                      //sacamos la altura y anchura del mapa en cada momento para que la espiral se ajuste sola
+                      var mapa2=document.getElementById("mapa");
+                      var estilo=getComputedStyle(mapa2);
+                      var altura=Math.round(parseInt(estilo.height));
+                      var anchura=Math.round(parseInt(estilo.width));
+                      //var rBase=210; 
+                      var rBase=340;
+                      var center = point1;
+                      //point1 = point1.add(L.point(130, 0));
+                      let xspan = anchura / (anchura + altura);
+                      let yspan = altura / (anchura + altura);
+                      for (let i = 0; i < datosEspecie.length; i++) {
+                          //let asymptoticExpansion = 1.2; // expansion al infinito
+                          //let initialExpansion = 17;
+                          //let globalExpansion = 18; // asintotica * global debe quedar mas o menos constante
+                          //rho = globalExpansion * i * (asymptoticExpansion + initialExpansion/(1 + i));
+                          //point1 = point1.add(L.point(xspan*rho*Math.cos(i), yspan*rho*Math.sin(i)));
+                          let x = rBase*(1+Math.trunc(i/8))*Math.cos(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*xspan ;
+                          let y = rBase*(1+Math.trunc(i/8))*Math.sin(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*yspan;
+                          point1 = center;
+                          point1 = point1.add(L.point(x, y));
+                          var latLong= omap.layerPointToLatLng(point1);
+                          var imagenIcono="https://wir.iucnredlist.org/"+datosEspecie[i]["nombreCientifico"]+".jpg";
+                          var myIcon = L.icon({
+                              iconUrl: imagenIcono,
+                              iconSize: [48, 45],
+                              iconAnchor: [25, 45],
+                              shadowUrl: {IUCNlogo},
+                              shadowSize: [48, 45],
+                              shadowAnchor: [25, 45],
+                              popupAnchor: [0, -45],
+                              className: 'image'
+                          });
+                          let marcador= L.marker(latLong,{icon: myIcon,alt: ""});
+                          marcador.bindPopup(`
+                              <h4>${datosEspecie[i]["nombreComun"]}</h4>
+                              <img class="imagenPopup" src="https://wir.iucnredlist.org/${datosEspecie[i]["nombreCientifico"]}.jpg" alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
+                              <p>Scientific name: "${datosEspecie[i]["nombreCientificoTexto"]}"<br/> 
+                              Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/> 
+                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<a  onClick=(clicSobreImagen(${datosEspecie[i]["taxonid"]}))>See more details</a></p>
+                  `       );
+                          marcador.bindTooltip(datosEspecie[i]["nombreComun"],{direction:'bottom',permanent:true,className: 'transparent-tooltip'}).openTooltip();
+                          if(datosEspecie[i]["clase"]==="MAMMALIA") marcador.addTo(mammaliaGroup);
+                          if(datosEspecie[i]["clase"]==="REPTILIA") marcador.addTo(reptiliaGroup);
+                          if(datosEspecie[i]["clase"]==="INSECTA") marcador.addTo(insectaGroup);
+                          if(datosEspecie[i]["clase"]==="AMPHIBIA") marcador.addTo(amphibiaGroup);
+                          if(datosEspecie[i]["clase"]==="ACTINOPTERYGII") marcador.addTo(fishGroup);
+                          if(datosEspecie[i]["clase"]==="AVES") marcador.addTo(birdGroup);
+                      }
+      
+                      //mostrarAnimalClassControl(true);              
+                  });
+                  mammaliaGroup.addTo(omap);
+                  reptiliaGroup.addTo(omap);
+                  insectaGroup.addTo(omap);
+                  amphibiaGroup.addTo(omap);
+                  fishGroup.addTo(omap);
+                  birdGroup.addTo(omap);
+              })
+              .catch(err=>console.log("Error: ",err))
+            }
 
             //PONEMOS Y QUITAMOS CAPAS EN FUNCION DEL ZOOM
             omap.on('zoomend', function() {
