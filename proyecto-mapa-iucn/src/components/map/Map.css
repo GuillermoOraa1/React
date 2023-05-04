@@ -22,7 +22,7 @@
 .transparent-tooltip {
     border: none;
     box-shadow: none;
-    height: 8px;
+    height: 8px; /*¿ESTOS SON LOS TEXTOS DEL TOOLTIP?*/
 }
 
 .transparent-tooltip::before {

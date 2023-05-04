@@ -4,6 +4,12 @@ import { MapContainer, TileLayer,Marker, Popup, useMap, GeoJSON, ZoomControl } f
 import countries_geojson from './docs/countries.geo.json';
 import data from './docs/countries-list.json';
 import IUCNlogo from "../../assets/images/IUCN_Red_List-2.png";
+import mammalsIcon from  "../../assets/icons-menu/mamiferos.png";
+import reptilesIcon from  "../../assets/icons-menu/reptiles.jpg";
+import insectsIcon from  "../../assets/icons-menu/insectos.png";
+import amphibiansIcon from  "../../assets/icons-menu/anfibios-2.png";
+import birdsIcon from  "../../assets/icons-menu/aves.png";
+import fishesIcon from  "../../assets/icons-menu/peces.jpg";
 import './Map.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -103,7 +109,7 @@ const RefMap = () => {
     }
 
     function clicSobreImagen(codigoAnimal){
-        alert("El codigo del animal es "+codigoAnimal);
+        console.log("El codigo del animal es "+codigoAnimal);
     }
 
     
@@ -165,8 +171,10 @@ const RefMap = () => {
             paises.map((pais)=>{
               var marcador=L.marker([pais.coordinates[0],pais.coordinates[1]]).bindTooltip(pais.country,{direction:'center',permanent:true}).openTooltip();
               marcador.on('click', ()=>{
+                  mostrarAnimalThreatLevelSelector(false);
+                  mostrarAnimalClassControl(false);
                   omap.flyTo([pais.coordinates[0],pais.coordinates[1]],pais.zoom);
-                  //mostrarAnimalClassControl(false);
+                  mostrarAnimalThreatLevelSelector(true);
                   paisSeleccionado=pais;
                   fetchDataByCountry (pais);                
                   omap.on('zoomend', function() {
@@ -178,10 +186,31 @@ const RefMap = () => {
               });
               marcador.addTo(countryGroups);
               marcador.on('contextmenu', function() { 
-                  //mostrarAnimalClassControl(false);
-                  
+                  mostrarAnimalClassControl(false);
+                  mostrarAnimalThreatLevelSelector(false);
               });
               return null;
+            });
+
+            //PONEMOS Y QUITAMOS CAPAS EN FUNCION DEL ZOOM
+            omap.on('zoomend', function() {
+              if(omap.getZoom() >8 && omap.hasLayer(fronteras)){
+                omap.removeLayer(fronteras);
+              }
+              if(omap.getZoom() <8 && !omap.hasLayer(fronteras)){
+                fronteras.addTo(omap); 
+              }
+              if(omap.getZoom() <(zoom1-2)){
+                mostrarAnimalClassControl(false);
+                mostrarAnimalThreatLevelSelector(false);
+              }
+              if (omap.getZoom() <4){
+                omap.removeLayer(countryGroups);
+                regionsGroups.addTo(omap);
+              }else {
+                omap.removeLayer(regionsGroups);
+                countryGroups.addTo(omap);       
+              }
             });
 
             //HACEMOS QUE CADA VEZ QUE SE SELECCIONE UN PAIS SE MUESTREN SUS ANIMALES
@@ -224,7 +253,7 @@ const RefMap = () => {
                               iconUrl: imagenIcono,
                               iconSize: [48, 45],
                               iconAnchor: [25, 45],
-                              shadowUrl: {IUCNlogo},
+                              shadowUrl: IUCNlogo,
                               shadowSize: [48, 45],
                               shadowAnchor: [25, 45],
                               popupAnchor: [0, -45],
@@ -236,7 +265,7 @@ const RefMap = () => {
                               <img class="imagenPopup" src="https://wir.iucnredlist.org/${datosEspecie[i]["nombreCientifico"]}.jpg" alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
                               <p>Scientific name: "${datosEspecie[i]["nombreCientificoTexto"]}"<br/> 
                               Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/> 
-                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<a  onClick=(clicSobreImagen(${datosEspecie[i]["taxonid"]}))>See more details</a></p>
+                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<a  onClick=${clicSobreImagen(datosEspecie[i]["taxonid"])}>See more details</a></p>
                   `       );
                           marcador.bindTooltip(datosEspecie[i]["nombreComun"],{direction:'bottom',permanent:true,className: 'transparent-tooltip'}).openTooltip();
                           if(datosEspecie[i]["clase"]==="MAMMALIA") marcador.addTo(mammaliaGroup);
@@ -247,37 +276,13 @@ const RefMap = () => {
                           if(datosEspecie[i]["clase"]==="AVES") marcador.addTo(birdGroup);
                       }
       
-                      //mostrarAnimalClassControl(true);              
+                      mostrarAnimalClassControl(true);              
                   });
-                  mammaliaGroup.addTo(omap);
-                  reptiliaGroup.addTo(omap);
-                  insectaGroup.addTo(omap);
-                  amphibiaGroup.addTo(omap);
-                  fishGroup.addTo(omap);
-                  birdGroup.addTo(omap);
+
               })
               .catch(err=>console.log("Error: ",err))
             }
 
-            //PONEMOS Y QUITAMOS CAPAS EN FUNCION DEL ZOOM
-            omap.on('zoomend', function() {
-              if(omap.getZoom() >8 && omap.hasLayer(fronteras)){
-                omap.removeLayer(fronteras);
-              }
-              if(omap.getZoom() <8 && !omap.hasLayer(fronteras)){
-                  fronteras.addTo(omap); 
-              }
-              if(omap.getZoom() <(zoom1-2)){
-                  //mostrarAnimalClassControl(false);
-              }
-            if (omap.getZoom() <4){
-                  omap.removeLayer(countryGroups);
-                  regionsGroups.addTo(omap);
-              }else {
-                  omap.removeLayer(regionsGroups);
-                  countryGroups.addTo(omap);       
-              }
-            });
 
             //CONTROL PARA HACER FULL SCREEN
             var fullScreenControl = L.control({position:'topright'});
@@ -310,8 +315,105 @@ const RefMap = () => {
             }
             fullScreenControl.addTo(omap);
 
-            
+          //CONTROLES DE SELECCION DE ANIMALES
+          const layerControl = L.control.layers(null,null,{collapsed: false,position:"topleft"});
+          function mostrarAnimalClassControl(arg){
+              const mammals = L.layerGroup([mammaliaGroup]);
+              const reptils = L.layerGroup([reptiliaGroup]);
+              const insects = L.layerGroup([insectaGroup]);
+              const amphibians = L.layerGroup([amphibiaGroup]);
+              const birds = L.layerGroup([birdGroup]);
+              const fishes = L.layerGroup([fishGroup]);
+
+              if(arg===true){
+                  layerControl.addOverlay(mammals, '<img src='+mammalsIcon+' width="18" height="17" /> Mammals');
+                  layerControl.addOverlay(reptils, '<img src='+reptilesIcon+' width="16" height="16" /> Reptiles');
+                  layerControl.addOverlay(insects, '<img src='+insectsIcon+' width="16" height="16" /> Insects');
+                  layerControl.addOverlay(amphibians, '<img src='+amphibiansIcon+' width="18" height="12" /> Amphibians');
+                  layerControl.addOverlay(birds, '<img src='+birdsIcon+' width="17" height="13" /> Birds');
+                  layerControl.addOverlay(fishes, '<img src='+fishesIcon+' width="14" height="12" /> Fishes');
+                  mammals.addTo(omap);
+                  reptils.addTo(omap);
+                  insects.addTo(omap);
+                  amphibians.addTo(omap);
+                  birds.addTo(omap);
+                  fishes.addTo(omap);
+                  layerControl.addTo(omap);
+              }
+              if(arg===false){
+                  mammaliaGroup=L.featureGroup([]);
+                  reptiliaGroup=L.featureGroup([]);
+                  insectaGroup=L.featureGroup([]);
+                  amphibiaGroup=L.featureGroup([]);
+                  birdGroup=L.featureGroup([]);
+                  fishGroup=L.featureGroup([]);
+
+                  mammals.eachLayer(function(layer) { omap.removeLayer(layer);});
+                  reptils.eachLayer(function(layer) { omap.removeLayer(layer);});
+                  insects.eachLayer(function(layer) { omap.removeLayer(layer);});
+                  amphibians.eachLayer(function(layer) { omap.removeLayer(layer);});
+                  birds.eachLayer(function(layer) { omap.removeLayer(layer);});
+                  fishes.eachLayer(function(layer) { omap.removeLayer(layer);});
+
+                  layerControl._layerControlInputs=[];
+                  layerControl._layers=[];
+                  //console.log("ppp");
+                  //console.log(layerControl);
+                  omap.removeControl(layerControl);
+              }
+          }   
           
+          //CONTROLES DE NIVEL DE AMENAZA
+
+          L.Control.SelectAnimalThreatLevel = L.Control.extend({
+            //Inicializacion
+            initialize: function(options){
+                L.Util.setOptions(this,options);
+            },
+            //Opciones
+            options: {
+                position:'topleft',
+            },
+
+            onAdd: function(map) {
+                const controlDiv = L.DomUtil.create('span', 'nivelAmenaza');
+                controlDiv.innerHTML=`
+                <label>Extinct in the wild<input type="radio" id="EX" name="threatLevel" onClick="modificarNivelDeAmenaza('EX')"></label><br>
+                <label>Critically endangered<input type="radio" id="CR" name="threatLevel" checked onClick="modificarNivelDeAmenaza('CR')"></label><br>
+                <label>Endangered<input type="radio" id="EN" name="threatLevel" onClick="modificarNivelDeAmenaza('EN')"></label><br>
+                `;
+                controlDiv.style.width='35%';
+                controlDiv.style.height='20px';
+                controlDiv.style.backgroundColor='#f1f1f1';
+                controlDiv.style.textAlign='center';
+                controlDiv.style.border='3px solid green';
+                controlDiv.style.borderRadius='16px';
+                controlDiv.style.marginLeft='20%';
+                controlDiv.style.marginRight='20%';
+                controlDiv.style.marginTop='0px';
+                return controlDiv;
+            },
+
+            onRemove: function(map) {},
+          });
+
+          var controlAnimalThreatLevelSelector= new L.Control.SelectAnimalThreatLevel();
+
+          function mostrarAnimalThreatLevelSelector(arg){
+              if(arg===true){
+                  controlAnimalThreatLevelSelector.addTo(omap);
+              }
+              if(arg===false){
+                  omap.removeControl(controlAnimalThreatLevelSelector);  
+                  nivelDeAmenaza="CR";  
+              }
+          }
+        
+          function modificarNivelDeAmenaza(nivel){
+              nivelDeAmenaza=nivel;
+              mostrarAnimalClassControl(false);
+              fetchDataByCountry (paisSeleccionado);
+          }
 
         }
     }, [omap]);
