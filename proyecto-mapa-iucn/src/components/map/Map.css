@@ -22,12 +22,18 @@
 .transparent-tooltip {
     border: none;
     box-shadow: none;
-    height: 8px; /*¿ESTOS SON LOS TEXTOS DEL TOOLTIP?*/
+    height: 20px; /*¿ESTOS SON LOS TEXTOS DEL TOOLTIP?*/
 }
 
 .transparent-tooltip::before {
     border: none;
 } 
+
+.leaflet-tooltip-bottom {
+    margin-top: 6px;
+    height: 12px !important;
+    line-height: 0 !important;
+}
 
 .leaflet-top{
     display:flex !important;

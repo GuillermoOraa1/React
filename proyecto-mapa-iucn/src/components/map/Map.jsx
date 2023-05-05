@@ -265,7 +265,7 @@ const RefMap = () => {
                               <img class="imagenPopup" src="https://wir.iucnredlist.org/${datosEspecie[i]["nombreCientifico"]}.jpg" alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
                               <p>Scientific name: "${datosEspecie[i]["nombreCientificoTexto"]}"<br/> 
                               Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/> 
-                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<a  onClick=${clicSobreImagen(datosEspecie[i]["taxonid"])}>See more details</a></p>
+                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<button onClick=(clicSobreImagen(${datosEspecie[i]["taxonid"]}))>See more details</button></p>
                   `       );
                           marcador.bindTooltip(datosEspecie[i]["nombreComun"],{direction:'bottom',permanent:true,className: 'transparent-tooltip'}).openTooltip();
                           if(datosEspecie[i]["clase"]==="MAMMALIA") marcador.addTo(mammaliaGroup);
@@ -439,12 +439,19 @@ const RefMap = () => {
     
  
 
-const Mapa =()=>{
+const Mapa =({changeId})=>{
+/*     var lista=['15954','22694927','181008073'];
+    function cambiarImagen(){
+      var valor=Math.floor(Math.random() * 3);
+      console.log(lista[valor]);
+      changeId(lista[valor]);
+    } */
 
     return (
       <>
         <select name="select-region" id="select-region-id"></select>
         <select name="select-pais" id="select-pais-id"></select>
+        {/* <button onClick={cambiarImagen}>CargarImagen</button> */}
         <div className="principal">
           <div className="contenedor">
             <div className="location-container">
