@@ -11,27 +11,39 @@ const header =()=>{
     return(
         <div className="header">
             <div className="logo">
-                <img src={IUCNlogo} alt="IUCN logo" width="160px" height="160px" />
+                <img src={IUCNlogo} alt="IUCN logo" width="200px" height="210px" />
             </div>
+            
             <div className="text">
                 <div className="title">
                     <h1>The IUCN Red List of Threatened Species</h1>
                 </div>
                 <div className="listOfSpecies">
                     <div className="listOfSpecies-text">
-                        <h3>More than 42,100 species are threatened with extinction.</h3>
+                        <h4>More than 42,100 species are threatened with extinction.</h4>
                         <h4>That is still 28% of all assessed species.</h4>
                     </div>
-                    <div className="listOfSpecies-icons">
-                        <p>Amphibians <span><strong>41%</strong> <img src={amphibiansImage} alt="Amphibians icon" /></span></p>
-                        <p>Mammals <span><strong>27%</strong> <img src={mammalsImage} alt="Mammals icon"  /></span></p>
-                        <p>Birds <span><strong>13%</strong> <img src={birdsImage} alt="Birds icon"  /></span></p>
-                        <p>Reptiles <span><strong>21%</strong> <img src={reptilesImage} alt="Reptiles icon" /></span></p>
-                        <p>Fishes <span><strong>55%</strong> <img src={fishesImage} alt="Fishes icon" /></span></p>
-                        <p>Insects <span><strong>40%</strong> <img src={insectsImage} alt="Insects icon" /></span></p> 
+                    <div className="loginForm">
+                        <form action="#">
+                            <label htmlFor="user">User:</label> <input type="text" name="user" />
+                            <label htmlFor="password">Password:</label> <input type="password" name="password" />
+                        </form>
                     </div>
                 </div>
+
+                <div className="listOfSpecies-icons">
+                    <span><p>AMPHIBIANS <strong>41%</strong></p><img src={amphibiansImage} alt="Amphibians icon"  width="45px" height="55px"/></span>
+                    <span><p>MAMMALS <strong>27%</strong></p><img src={mammalsImage} alt="Mammals icon"  width="70px" height="60px"/></span>
+                    <span><p>BIRDS <strong>13%</strong></p><img src={birdsImage} alt="Birds icon"  width="60px" height="50px"/></span>
+                    <span><p>REPTILES <strong>21%</strong></p><img src={reptilesImage} alt="Reptiles icon"  width="80px" height="60px"/></span>
+                    <span><p>FISHES <strong>55%</strong></p><img src={fishesImage} alt="Fishes icon"  width="80px" height="60px"/></span>
+                    <span><p>INSECTS <strong>40%</strong></p><img src={insectsImage} alt="Insects icon"  width="50px" height="50px"/></span> 
+                </div>
             </div>
+
+
+
+            
 
             
 

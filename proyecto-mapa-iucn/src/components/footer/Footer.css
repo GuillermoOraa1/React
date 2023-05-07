@@ -1,0 +1,32 @@
+.content{
+    width:100%;
+    display:inline-flex;
+    justify-content:  space-evenly;
+    background-color:#AD180D;
+    color:white;
+    padding-top:1rem;
+    padding-bottom:1rem;
+}
+.description{
+    /* width:60%; */
+    /* background-color:orange; */
+}
+.description p{
+    font-size:0.7rem;
+    line-height:0.05rem;
+    margin-left:2rem;
+}
+
+.rrss{
+    display:inline-flex;
+    line-height:0.05rem;
+    /* background-color:blue; */
+    font-size:0.7rem;
+}
+
+.rrss p{
+    padding-left:1rem; 
+}
+.rrss a{
+    padding-left:1rem; 
+}

@@ -33,7 +33,21 @@ var nivelDeAmenaza="CR";
 
 
 
-const RefMap = () => {
+const RefMap = ({changeIdAnimal}) => {
+
+    const [idAnimal2, setIdAnimal2]=useState('');
+    useEffect(() => {
+      changeIdAnimal(idAnimal2);
+    }, [idAnimal2]);
+
+    /*
+    const [idAnimal, setIdAnimal]=useState('');
+
+    useEffect(() => {
+      changeId(idAnimal);
+    }, [idAnimal]);
+    */
+
     const {results,paises}=data;
 
     const cargarSelectPaises=(identificadorRegion)=>{
@@ -108,10 +122,13 @@ const RefMap = () => {
         return registro;
     }
 
-    function clicSobreImagen(codigoAnimal){
+/*     function clicSobreImagen(codigoAnimal){
         console.log("El codigo del animal es "+codigoAnimal);
-    }
+    } */
 
+    window.clicSobreImagen = (numero) => {
+      setIdAnimal2(numero);
+    };
     
     //CREAMOS LA VARIABLE QUE HACE REFERENCIA AL MAPA
     const refMap = useMap();
@@ -260,13 +277,15 @@ const RefMap = () => {
                               className: 'image'
                           });
                           let marcador= L.marker(latLong,{icon: myIcon,alt: ""});
-                          marcador.bindPopup(`
-                              <h4>${datosEspecie[i]["nombreComun"]}</h4>
+                          marcador.bindPopup(
+                            L.popup().setContent(
+                              `<h4>${datosEspecie[i]["nombreComun"]}</h4>
                               <img class="imagenPopup" src="https://wir.iucnredlist.org/${datosEspecie[i]["nombreCientifico"]}.jpg" alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
                               <p>Scientific name: "${datosEspecie[i]["nombreCientificoTexto"]}"<br/> 
-                              Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/> 
-                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<button onClick=(clicSobreImagen(${datosEspecie[i]["taxonid"]}))>See more details</button></p>
-                  `       );
+                              Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/>
+                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<button onclick="clicSobreImagen(${datosEspecie[i]["taxonid"]})">Click me!</button>`
+                            )
+                          );
                           marcador.bindTooltip(datosEspecie[i]["nombreComun"],{direction:'bottom',permanent:true,className: 'transparent-tooltip'}).openTooltip();
                           if(datosEspecie[i]["clase"]==="MAMMALIA") marcador.addTo(mammaliaGroup);
                           if(datosEspecie[i]["clase"]==="REPTILIA") marcador.addTo(reptiliaGroup);
@@ -358,7 +377,7 @@ const RefMap = () => {
                   layerControl._layerControlInputs=[];
                   layerControl._layers=[];
                   //console.log("ppp");
-                  //console.log(layerControl);
+                  console.log(layerControl);
                   omap.removeControl(layerControl);
               }
           }   
@@ -409,7 +428,7 @@ const RefMap = () => {
               }
           }
         
-          function modificarNivelDeAmenaza(nivel){
+          window.modificarNivelDeAmenaza=(nivel)=>{
               nivelDeAmenaza=nivel;
               mostrarAnimalClassControl(false);
               fetchDataByCountry (paisSeleccionado);
@@ -418,19 +437,6 @@ const RefMap = () => {
         }
     }, [omap]);
     
-
-/* 
-
-
-
-
-
-
-
-
- */
-
-
     return null;
   };
 
@@ -440,23 +446,22 @@ const RefMap = () => {
  
 
 const Mapa =({changeId})=>{
-/*     var lista=['15954','22694927','181008073'];
-    function cambiarImagen(){
-      var valor=Math.floor(Math.random() * 3);
-      console.log(lista[valor]);
-      changeId(lista[valor]);
-    } */
+
+    const [idAnimal, setIdAnimal]=useState('');
+
+    useEffect(() => {
+      changeId(idAnimal);
+    }, [idAnimal]);
 
     return (
       <>
         <select name="select-region" id="select-region-id"></select>
         <select name="select-pais" id="select-pais-id"></select>
-        {/* <button onClick={cambiarImagen}>CargarImagen</button> */}
         <div className="principal">
           <div className="contenedor">
             <div className="location-container">
               <MapContainer id="mapa" className={'mapa'} center={[12,0]} zoom={2.25} minZoom= {2.25} zoomSnap= {0.25} maxBounds= {Bounds} maxBoundsViscosity= {1.0} zoomControl={false}>
-                <RefMap />
+                <RefMap changeIdAnimal={setIdAnimal}/>
               <TileLayer
                 attribution='Mapa de prueba de la <a href="https://www.iucnredlist.org/" target="_blank">Lista Roja de Especies Amenazadas de la IUCN</a> hecho por Andres y Guillermo'
                 url="http://tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg" noWrap={true}
