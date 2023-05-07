@@ -177,7 +177,12 @@ const RefMap = ({changeIdAnimal}) => {
             results.map((point)=>{
                 if(point.name!=="Global"){
                   var marcador=L.marker([point.coordinates[0],point.coordinates[1]]).bindTooltip(point.name,{direction:'center',permanent:true}).openTooltip();
-                  marcador.on('click', ()=>{omap.flyTo([point.coordinates[0],point.coordinates[1]],point.zoom)});
+                  marcador.on('click', ()=>{
+                    omap.flyTo([point.coordinates[0],point.coordinates[1]],point.zoom);
+                    //Cargamos en el select la lista de paises de la region que hemos pinchado
+                    document.getElementById('select-pais-id').options.length=0;
+                    cargarSelectPaises(point.identifier);
+                  });
                   marcador.addTo(regionsGroups);
                 }
                 return null;

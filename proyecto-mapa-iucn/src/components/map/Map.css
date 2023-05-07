@@ -5,7 +5,7 @@
 }
 .contenedor{
     /* width:98%; */
-    height:550px;
+    height:555px;
     width:1240px;
     border: solid 3px black;
 }
@@ -22,17 +22,22 @@
 .transparent-tooltip {
     border: none;
     box-shadow: none;
-    height: 20px; /*¿ESTOS SON LOS TEXTOS DEL TOOLTIP?*/
+    height: 20px; 
 }
 
 .transparent-tooltip::before {
     border: none;
 } 
 
+/* .leaflet-tooltip{
+    padding:0 !important;
+} */
+
 .leaflet-tooltip-bottom {
     margin-top: 6px;
     height: 12px !important;
     line-height: 0 !important;
+    
 }
 
 .leaflet-top{
@@ -44,6 +49,8 @@
 .leaflet-container {
     line-height: 0.5;
 }
+
+/*style de los popups*/
 .leaflet-popup-content{
     display: inline-flex;
     flex-direction: column;
@@ -64,8 +71,9 @@
 .leaflet-popup-content p{
     text-align:justify;         
 }
+/*style de los popups*/
 
-
+/*style de los menus select de paises y regiones*/
 #select-region-id{
     margin-left:0.6em;
     width: 12em;
@@ -74,11 +82,9 @@
 #select-pais-id{
     width: 12em;
 }
+/*style de los menus select de paises y regiones*/
 
-.leaflet-left{
-    width: 100%;
-}
-
+/*style del threat animal control*/
 .nivelAmenaza{
     display: inline-flex;
     justify-content: center;
@@ -90,10 +96,12 @@
     margin-left: 2%;
     display: flex;
     align-items: center;
-} 
+}
+/*style del threat animal control*/ 
 
 /*style del class animal control*/
 .leaflet-left{
+    width: 100%;
     display:flex;
     justify-content: space-around;
 }
