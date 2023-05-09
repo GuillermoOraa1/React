@@ -4,6 +4,7 @@ import Footer from './components/footer/Footer';
 import Map from './components/map/Map';
 import Partnership from './components/partnership/Partnership';
 import ImagenComponente from "./components/ImagenComponent/imagenComponent";
+import NewsletterForm from "./components/newsletter/Newsletter";
 
 import './App.css';
 
@@ -14,6 +15,7 @@ function App() {
       <Header/>
       <Map changeId={setId}/>
       <ImagenComponente id={id}/>
+      <NewsletterForm/>
       <Partnership/>
       <Footer/>
     </>

@@ -1,14 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-
 const puppeteer = require('puppeteer');
 const jsdom = require('jsdom'); 
+const suscriptionRouter = require('./routes/suscriptions');
 
 const app = express();
-app.use(cors());
+
 app.use(express.json());
-
-
+app.use(cors());
 
 const buscarImagen=async (url) => {
   try {
@@ -42,6 +41,14 @@ app.get('/photo/:id', (req, res) => {
         res.json({ photo: response });
     });
 }); 
+
+
+app.use('/suscription', suscriptionRouter);
+
+
+
+
+
 
 app.listen(8000, () => {
     console.log(`Server is running on port 8000.`);
