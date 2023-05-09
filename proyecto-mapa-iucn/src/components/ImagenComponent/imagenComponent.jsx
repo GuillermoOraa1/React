@@ -2,16 +2,22 @@ import React, { useState, useEffect } from "react";
 
 const ComponenteImagen = ({id})=>{
     const [url, setUrl] = useState("");
+    const [login, setLoading] = useState(false);
     useEffect(() => {
-    fetch("http://localhost:8000/photo/"+id)
-      .then((res) => res.json())
-      .then((data) => setUrl(data.photo));
+      if(id){
+        setLoading(true);
+        fetch("http://localhost:8000/photo/"+id)
+        .then((res) => res.json())
+        .then((data) => {
+          setUrl(data.photo);
+          setLoading(false);
+        });
+      }
     }, [id]);
 
     return(
     <>
-        {/* <p>{url}</p> */}
-        <img src={url} width="170px" height="auto" />
+        {!login && id &&(<img src={url} width="170px" height="auto" />)}
     </>
 );
 }

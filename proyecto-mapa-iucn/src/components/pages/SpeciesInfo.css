@@ -1,0 +1,15 @@
+.species-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+  
+  .species-details {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }

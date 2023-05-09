@@ -5,6 +5,7 @@ import Map from './components/map/Map';
 import Partnership from './components/partnership/Partnership';
 import ImagenComponente from "./components/ImagenComponent/imagenComponent";
 import NewsletterForm from "./components/newsletter/Newsletter";
+import SpeciesInfo from "./components/pages/SpeciesInfo";
 
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
       <Header/>
       <Map changeId={setId}/>
       <ImagenComponente id={id}/>
+      <SpeciesInfo speciesId={id}/>
       <NewsletterForm/>
       <Partnership/>
       <Footer/>
