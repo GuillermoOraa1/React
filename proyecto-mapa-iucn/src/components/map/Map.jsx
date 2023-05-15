@@ -96,9 +96,10 @@ const RefMap = ({changeIdAnimal}) => {
 
     const fetchDataBySpecie =async(url)=>{
         var registro=null;
+        var nombrecomun="";
         await fetch(url)
         .then((response) => response.json())
-        .then((data) => {
+        .then(async (data) => {
             const {result}=data;
             if(result[0].class==="MAMMALIA" || result[0].class==="AMPHIBIA" || 
             result[0].class==="REPTILIA" || result[0].class==="INSECTA" ||
@@ -106,34 +107,37 @@ const RefMap = ({changeIdAnimal}) => {
                 /* if (result[0].scientific_name !=null){
                     nombrecientifico=result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0]
                 }else {nombrecientifico="";} */
-                var nombrecomun="";
                 if (result[0].main_common_name !=null){
                     nombrecomun=result[0].main_common_name;
-                }else {nombrecomun=result[0].scientific_name;}
+                }else {
+                  var nombres=result[0].scientific_name.split(" ");
+                  nombrecomun=nombres[0].concat(' ',nombres[1]);
+                }
+                
 
                 registro={taxonid:result[0].taxonid,clase:result[0].class,nombreComun:nombrecomun,
                     nombreCientifico:result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0],
                     poblacion:result[0].population_trend,nombreCientificoTexto:result[0].scientific_name,
                     assementDate:result[0].assessment_date};
+
+                await fetch("http://localhost:8000/photo-google/icon/"+nombrecomun)
+                .then((res) => res.json())
+                .then((data) => {
+                      registro.url=data.photo;
+                });
             }
             
 
         }).catch(error=>{console.log(error)}); 
         return registro;
     }
-
-/*     function clicSobreImagen(codigoAnimal){
-        console.log("El codigo del animal es "+codigoAnimal);
-    } */
-
-    window.clicSobreImagen = (numero) => {
-      setIdAnimal2(numero);
-    };
     
     //CREAMOS LA VARIABLE QUE HACE REFERENCIA AL MAPA
     const refMap = useMap();
 
     const [omap, setOMap] = useState();
+
+    const popupElRef = useRef(null);
 
     useEffect(() => {
                 setOMap(refMap);
@@ -265,12 +269,22 @@ const RefMap = ({changeIdAnimal}) => {
                           //let globalExpansion = 18; // asintotica * global debe quedar mas o menos constante
                           //rho = globalExpansion * i * (asymptoticExpansion + initialExpansion/(1 + i));
                           //point1 = point1.add(L.point(xspan*rho*Math.cos(i), yspan*rho*Math.sin(i)));
-                          let x = rBase*(1+Math.trunc(i/8))*Math.cos(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*xspan ;
-                          let y = rBase*(1+Math.trunc(i/8))*Math.sin(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*yspan;
-                          point1 = center;
-                          point1 = point1.add(L.point(x, y));
+                          if(datosEspecie.length<=8){
+                            let x = rBase*(1+Math.trunc(i/8))*Math.cos(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*xspan ;
+                            let y = rBase*(1+Math.trunc(i/8))*Math.sin(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*yspan;
+                            point1 = center;
+                            point1 = point1.add(L.point(x, y));
+                          }else if(datosEspecie.length>8 && datosEspecie.length<=20){
+                            if(i%4===0 && i!==0) {point1 = point1.add(L.point(-560, 90))};
+                            point1 = point1.add(L.point(140, 0));
+                          }else{
+                            if(i%5===0 && i!==0) {point1 = point1.add(L.point(-700, 90))};
+                            point1 = point1.add(L.point(140, 0));
+                          }
+                          
                           var latLong= omap.layerPointToLatLng(point1);
-                          var imagenIcono="https://wir.iucnredlist.org/"+datosEspecie[i]["nombreCientifico"]+".jpg";
+                          var imagenIcono=datosEspecie[i]["url"];
+                          //var imagenIcono="https://wir.iucnredlist.org/"+datosEspecie[i]["nombreCientifico"]+".jpg";
                           var myIcon = L.icon({
                               iconUrl: imagenIcono,
                               iconSize: [48, 45],
@@ -285,10 +299,10 @@ const RefMap = ({changeIdAnimal}) => {
                           marcador.bindPopup(
                             L.popup().setContent(
                               `<h4>${datosEspecie[i]["nombreComun"]}</h4>
-                              <img class="imagenPopup" src="https://wir.iucnredlist.org/${datosEspecie[i]["nombreCientifico"]}.jpg" alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
+                              <img class="imagenPopup" src=${datosEspecie[i]["url"]} alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
                               <p>Scientific name: "${datosEspecie[i]["nombreCientificoTexto"]}"<br/> 
                               Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/>
-                              Population: ${datosEspecie[i]["poblacion"]}<br/>...<button onclick="clicSobreImagen(${datosEspecie[i]["taxonid"]})">Click me!</button>`
+                              Population: ${datosEspecie[i]["poblacion"]}<br/><button id="mostrarDatos" onclick="clicSobreImagen(${datosEspecie[i]["taxonid"]})">See more...</button>`
                             )
                           );
                           marcador.bindTooltip(datosEspecie[i]["nombreComun"],{direction:'bottom',permanent:true,className: 'transparent-tooltip'}).openTooltip();
@@ -306,7 +320,8 @@ const RefMap = ({changeIdAnimal}) => {
               })
               .catch(err=>console.log("Error: ",err))
             }
-
+            //Movemos de posicion el boton del zoom
+            L.control.zoom({position:'topright'}).addTo(omap);
 
             //CONTROL PARA HACER FULL SCREEN
             var fullScreenControl = L.control({position:'topright'});
@@ -439,6 +454,24 @@ const RefMap = ({changeIdAnimal}) => {
               fetchDataByCountry (paisSeleccionado);
           }
 
+          window.clicSobreImagen = (numero) => {
+            omap.closePopup();
+            setIdAnimal2(numero);
+            const section = document.getElementById('speciesInfo');
+            if (section) {
+              section.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth' });
+            } else {
+              setTimeout(() => {
+                  const section = document.getElementById('speciesInfo');
+                  console.log("zzz");
+                  console.log(section);
+                  if (section) {
+                      section.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth' });
+                  }
+              }, 500)
+            }
+          };
+
         }
     }, [omap]);
     
@@ -467,16 +500,10 @@ const Mapa =({changeId})=>{
             <div className="location-container">
               <MapContainer id="mapa" className={'mapa'} center={[12,0]} zoom={2.25} minZoom= {2.25} zoomSnap= {0.25} maxBounds= {Bounds} maxBoundsViscosity= {1.0} zoomControl={false}>
                 <RefMap changeIdAnimal={setIdAnimal}/>
-              <TileLayer
-                attribution='Mapa de prueba de la <a href="https://www.iucnredlist.org/" target="_blank">Lista Roja de Especies Amenazadas de la IUCN</a> hecho por Andres y Guillermo'
-                url="http://tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg" noWrap={true}
-              />
-              <ZoomControl position='topright' />
-              {/* <Marker position={[51.505, -0.09]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker> */}
+                <TileLayer
+                  attribution='Mapa de prueba de la <a href="https://www.iucnredlist.org/" target="_blank">Lista Roja de Especies Amenazadas de la IUCN</a> hecho por Andres y Guillermo'
+                  url="http://tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg" noWrap={true}
+                />
               </MapContainer>
             </div>
           </div>

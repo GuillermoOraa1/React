@@ -28,7 +28,6 @@ const NewsletterForm=()=>{
     
     return (
         <>
-          <p>Esto es la newsletter</p>
           <form onSubmit={enviarSuscripción}>
             <label>Name:<input id="nombreNewsletter" type="text" value={name} onChange={(event) => setName(event.target.value)} /></label>
             <label>Email:<input id="emailNewsletter" type="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>

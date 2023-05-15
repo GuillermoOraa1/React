@@ -3,48 +3,19 @@ const cors = require('cors');
 const puppeteer = require('puppeteer');
 const jsdom = require('jsdom'); 
 const suscriptionRouter = require('./routes/suscriptions');
+const photosGoogleRouter = require('./routes/photosGoogle');
+const photosIucnRouter = require('./routes/photosIUCN');
 
 const app = express();
-
 app.use(express.json());
 app.use(cors());
 
-const buscarImagen=async (url) => {
-  try {
-    // Abro una instancia del puppeteer y accedemos a la url 
-    const browser = await puppeteer.launch() ;
-    const page = await browser.newPage();
-    const response = await page.goto(url,{
-        waitUntil: 'networkidle0',
-    });
 
-    //obtengo el html 
-	const html = await page.content(); 
-
-    const { window: { document } } = new jsdom.JSDOM(html);
-
-    // Cierro el puppeteer
-    await browser.close();
-
-    //Envio la respuesta
-    return document.querySelectorAll('.featherlight__gallery__image')[0].href;
-
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-app.get('/photo/:id', (req, res) => {
-    const url='https://apiv3.iucnredlist.org/api/v3/taxonredirect/'+req.params.id;
-    buscarImagen(url)
-    .then((response) => {
-        res.json({ photo: response });
-    });
-}); 
 
 
 app.use('/suscription', suscriptionRouter);
-
+app.use('/photo-google', photosGoogleRouter);
+app.use('/photo', photosIucnRouter);
 
 
 

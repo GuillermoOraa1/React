@@ -25,7 +25,7 @@ const SpeciesInfo = ({ speciesId }) => {
   }
 
   return (
-    <div className="species-info">
+    <div className="species-info" id="speciesInfo">
       <div className="species-details">
         <h2>{speciesData.scientific_name}</h2>
         <p>{speciesData.main_common_name}</p>
