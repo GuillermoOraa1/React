@@ -468,7 +468,7 @@ const RefMap = ({changeIdAnimal}) => {
                   if (section) {
                       section.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth' });
                   }
-              }, 500)
+              }, 2000)
             }
           };
 

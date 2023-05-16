@@ -7,6 +7,7 @@ const footer =()=>{
                 <div className="description">
                     <p>IUCN 2023. The IUCN Red List of Threatened Species. Version 2022-2. ISSN 2307-8235</p>
                     <p>© International Union for Conservation of Nature and Natural Resources.</p>
+		    <p>This website use images extracted from Google Images</p>
                     <p>This website was made possible through generous support from: IES Lope de Vega , Synchronicity Earth</p>
                     <p><a href="https://www.iucnredlist.org/policy/privacy-policy">Privacy and security</a></p>
                 </div>

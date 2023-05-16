@@ -44,7 +44,8 @@ app.get('/icon/:name', async(req, res) => {
                 cx: SEARCH_ENGINE_ID,
                 num: 1,
                 q: searchQuery,
-                searchType: 'image'
+                searchType: 'image',
+                imgType:'photo'
             }
     });
     res.json(response.data.items[0].link?{ photo: response.data.items[0].link }:{photo: "https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/IUCN_Red_List.svg/1200px-IUCN_Red_List.svg.png"});

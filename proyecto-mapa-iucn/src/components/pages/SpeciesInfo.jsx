@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import WikiComponent from './wikiComponent/WikiComponent';
 import "./SpeciesInfo.css";
 
 
 const SpeciesInfo = ({ speciesId }) => {
   const [speciesData, setSpeciesData] = useState(null);
-
   useEffect(() => {
     const fetchSpeciesData = async () => {
       try {
@@ -20,6 +20,7 @@ const SpeciesInfo = ({ speciesId }) => {
     fetchSpeciesData();
   }, [speciesId]);
 
+  
   if (!speciesData) {
     return <div>Cargando información...</div>;
   }
@@ -37,6 +38,7 @@ const SpeciesInfo = ({ speciesId }) => {
         <p><strong>Familia:</strong> {speciesData.family}</p>
         <p><strong>Género:</strong> {speciesData.genus}</p>
         <p><strong>Razón de amenaza:</strong> {speciesData.amended_reason}</p>
+        <WikiComponent scientificName={speciesData.scientific_name}/>
       </div>
     </div>
   );

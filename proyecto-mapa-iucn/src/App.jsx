@@ -6,6 +6,7 @@ import Partnership from './components/partnership/Partnership';
 import ImagenComponente from "./components/ImagenComponent/imagenComponent";
 import NewsletterForm from "./components/newsletter/Newsletter";
 import SpeciesInfo from "./components/pages/SpeciesInfo";
+import AmplifiedImages from "./components/amplifiedImagesComponent/AmplifiedImagesComponent";
 
 import './App.css';
 
@@ -16,6 +17,7 @@ function App() {
       <Header/>
       <Map changeId={setId}/>
       <ImagenComponente id={id}/>
+      <AmplifiedImages id={id}/>
       <SpeciesInfo speciesId={id}/>
       <NewsletterForm/>
       <Partnership/>

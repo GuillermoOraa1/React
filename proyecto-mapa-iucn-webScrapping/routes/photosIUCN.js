@@ -25,6 +25,13 @@ const buscarImagen=async (url) => {
       await browser.close();
   
       //Envio la respuesta
+      /* const attrsHREF=[];
+      document.querySelectorAll('.featherlight__gallery__image').forEach((item)=>{
+        if(attrsHREF.indexOf(item.href)===-1){
+          attrsHREF.push(item.href);
+        }
+      });
+      return attrsHREF; */
       return document.querySelectorAll('.featherlight__gallery__image')[0].href;
   
     } catch (error) {
