@@ -1,40 +1,63 @@
 import React, { useState, useEffect } from "react";
+import Dialog from '@mui/material/Dialog';
+import arrowL from '../../assets/images/left-arrow.png';
+import arrowR from '../../assets/images/right-arrow.png';
+import "./AmplifiedImagesComponent.css";
 
-const AmplifiedImagesComponent = ({id})=>{
-    const [scientificName, setScientificName] = useState("");
+const AmplifiedImagesComponent = ({name, isOpen, handleClose})=>{
     const [loading, setLoading] = useState(true);
     const [datos, setDatos] = useState([]);
-
+    const [indiceImagen, setIndiceImagen] = useState(0);
  
     useEffect(() => {
-      if(id){
-            setLoading(true);
-            fetch(`https://apiv3.iucnredlist.org/api/v3/species/id/${id}?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee`)
-            .then((res) => res.json())
-            .then((data) => {
-              setScientificName(data.result[0].scientific_name);
-              fetch(`http://localhost:8000/photo-google/images/${scientificName}`)
-              .then((res) => res.json())
-              .then((data2) => {
-                setDatos(data2.photo);
-                setLoading(false);
-              });
-            });
-/*             const response1 = await fetch(`https://apiv3.iucnredlist.org/api/v3/species/id/${id}?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee`);
-            const data1 = await response1.json();
-            setScientificName(data1.result[0].scientific_name);
-
-            const response2 = await fetch(`http://localhost:8000/photo-google/images/${scientificName}`);
-            const data2 = await response2.json();
-            setDatos(data2.photo);
-            setLoading(false); */
+      if(name){
+        setLoading(true);
+        fetch(`http://localhost:8000/photo-google/images/${name}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setDatos(data.photo);
+          setLoading(false);
+        });
       }
-    }, [id]);
+    }, [name]);
+
+    useEffect(() => {
+      const closeOnEscapeKey = (e) => (e.key === "Escape" ? handleClose() : null);
+      document.body.addEventListener("keydown", closeOnEscapeKey);
+      return () => {
+        document.body.removeEventListener("keydown", closeOnEscapeKey);
+      };
+    }, [handleClose]);
+
+    const siguienteImagen= ()=>{
+      if(indiceImagen===3) setIndiceImagen(0);
+      if(indiceImagen<3){
+        setIndiceImagen(indiceImagen+1);
+      } 
+    }
+  
+    const anteriorImagen= ()=>{
+      if(indiceImagen===0) setIndiceImagen(3);
+      if(indiceImagen>0){
+        setIndiceImagen(indiceImagen-1);
+      } 
+    }
 
     return(
-      <>
-          {!loading && datos.map((value,key) => (<img src={value} key={key} alt="imagenBicho" width='100px' height='100px'/>))}
-      </>
+
+      <Dialog aria-labelledby="customized-dialog-title" open={isOpen}>
+        <div className="container">
+          <button className="buttonClose" onClick={handleClose}>X</button> 
+          <input className="arrow-left" src={arrowR} type="image" alt="left arrow" onClick={anteriorImagen} />
+            {!loading && datos.map((item,index) => (
+                  <div key={index} className={index===indiceImagen?"slide active":"slide"}>
+                    {/* Si la key de la imagen es igual al indiceImagen que hay en ese momento, se mostrara esa imagen */}
+                    {index===indiceImagen && (<img src={item} key={index} alt="imagenBicho" width='500px' height='480px'/>)} 
+                  </div>      
+            ))}
+          <input className="arrow-right" src={arrowL} type="image" alt="left arrow" onClick={siguienteImagen} />
+        </div>
+      </Dialog>  
     );
 
 };

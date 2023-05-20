@@ -130,8 +130,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 .then((res) => res.json())
                 .then((data) => {
                       registro.url=data.photo;
-                      console.log("xxx");
-                      console.log(data.photo);
                 });
             }
             
@@ -144,8 +142,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
     const refMap = useMap();
 
     const [omap, setOMap] = useState();
-
-    const popupElRef = useRef(null);
 
     useEffect(() => {
                 setOMap(refMap);
@@ -268,6 +264,9 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                       //var rBase=210; 
                       var rBase=340;
                       var center = point1;
+                      if(datosEspecie.length>8){
+                        point1 = point1.add(L.point(0, -180))
+                      }
                       //point1 = point1.add(L.point(130, 0));
                       let xspan = anchura / (anchura + altura);
                       let yspan = altura / (anchura + altura);
@@ -406,8 +405,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
 
                   layerControl._layerControlInputs=[];
                   layerControl._layers=[];
-                  //console.log("ppp");
-                  console.log(layerControl);
                   omap.removeControl(layerControl);
               }
           }   
@@ -475,8 +472,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
             } else {
               setTimeout(() => {
                   const section = document.getElementById('speciesInfo');
-                  console.log("zzz");
-                  console.log(section);
                   if (section) {
                       section.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth' });
                   }
@@ -516,7 +511,7 @@ const Mapa =({changeId,changeName})=>{
         <div className="principal">
           <div className="contenedor">
             <div className="location-container">
-              <MapContainer id="mapa" className={'mapa'} center={[12,0]} zoom={2.25} minZoom= {2.25} zoomSnap= {0.25} maxBounds= {Bounds} maxBoundsViscosity= {1.0} zoomControl={false}>
+              <MapContainer id="mapa" className={'mapa'} center={[13,0]} zoom={2.25} minZoom= {2.25} zoomSnap= {0.25} maxBounds= {Bounds} maxBoundsViscosity= {1.0} zoomControl={false}>
                 <RefMap changeIdAnimal={setIdAnimal} changeNameAnimal={setNameAnimal}/>
                 <TileLayer
                   attribution='Mapa de prueba de la <a href="https://www.iucnredlist.org/" target="_blank">Lista Roja de Especies Amenazadas de la IUCN</a> hecho por Andres y Guillermo'

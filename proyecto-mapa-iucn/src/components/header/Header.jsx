@@ -23,12 +23,12 @@ const header =()=>{
                         <h4>More than 42,100 species are threatened with extinction.</h4>
                         <h4>That is still 28% of all assessed species.</h4>
                     </div>
-                    <div className="loginForm">
+                    {/* <div className="loginForm">
                         <form action="#">
                             <label htmlFor="user">User:</label> <input type="text" name="user" />
                             <label htmlFor="password">Password:</label> <input type="password" name="password" />
                         </form>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="listOfSpecies-icons">

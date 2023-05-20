@@ -21,7 +21,7 @@ import React, { useState, useEffect } from "react";
   );
 } */
 
-const ComponenteImagen = ({id,name})=>{
+const ComponenteImagen = ({id,name,open})=>{
     const [url, setUrl] = useState("");
     const [login, setLoading] = useState(false);
     useEffect(() => {
@@ -44,7 +44,7 @@ const ComponenteImagen = ({id,name})=>{
 
     return(
     <>
-        {!login && id &&(<img src={url} width="170px" height="auto" />)}
+        {!login && id &&(<img src={url} width="170px" height="auto" onClick={() => open(true)} />)}
     </>
     );
 }

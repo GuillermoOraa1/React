@@ -5,7 +5,10 @@ import "./SpeciesInfo.css";
 
 const SpeciesInfo = ({ speciesId }) => {
   const [speciesData, setSpeciesData] = useState(null);
+  const [load,setLoad]= useState(false);
+
   useEffect(() => {
+    
     const fetchSpeciesData = async () => {
       try {
         const response = await fetch(
@@ -13,6 +16,7 @@ const SpeciesInfo = ({ speciesId }) => {
         );
         const data = await response.json();
         setSpeciesData(data.result[0]);
+        setLoad(true);
       } catch (error) {
         console.error(error);
       }
@@ -20,6 +24,9 @@ const SpeciesInfo = ({ speciesId }) => {
     fetchSpeciesData();
   }, [speciesId]);
 
+  if (load===false) {
+    return <div></div>;
+  }
   
   if (!speciesData) {
     return <div>Cargando información...</div>;

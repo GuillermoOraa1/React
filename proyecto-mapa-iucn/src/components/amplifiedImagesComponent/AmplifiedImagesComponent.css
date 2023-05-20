@@ -1,6 +1,8 @@
 .container{
     width:500px;
-    height:500px;
+    height:480px;
+    padding-left:unset;
+    padding-right:unset;
 }
 .slide{
     max-width:100%;
@@ -38,7 +40,6 @@
     font-size:1.5em;
     background-color:transparent; 
     border-color:transparent;
-    color:white;
+    color:grey;
     font-weight:bolder;
 }
-

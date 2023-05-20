@@ -13,12 +13,13 @@ import './App.css';
 function App() {
   const [id, setId]=useState('');
   const [name, setName]=useState('');
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Header/>
       <Map changeId={setId} changeName={setName}/>
-      <ImagenComponente id={id} name={name}/>
-      <AmplifiedImages id={id}/>
+      <ImagenComponente id={id} name={name} open={setIsOpen}/>
+      <AmplifiedImages name={name} handleClose={() => setIsOpen(false)} isOpen={isOpen}/>
       <SpeciesInfo speciesId={id}/>
       <NewsletterForm/>
       <Partnership/>

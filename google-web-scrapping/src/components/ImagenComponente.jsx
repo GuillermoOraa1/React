@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const ImagenComponente = ({name})=>{
+const ImagenComponente = ({name,open})=>{
   const [url, setUrl] = useState("");
   const [login, setLoading] = useState(false);
   useEffect(() => {
@@ -15,9 +15,15 @@ const ImagenComponente = ({name})=>{
   }, [name]);
 
   return(
-  <>
-    {!login && name &&(<img src={url} width="170px" height="auto" />)}
-  </>
+    <>
+      {!login && name &&(
+      <>
+        <img src={url} width="170px" height="auto" onClick={() => open(true)} />
+      </>
+      )}   
+    </>
+
+
 );
 } 
 
