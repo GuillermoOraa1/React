@@ -12,11 +12,12 @@ import './App.css';
 
 function App() {
   const [id, setId]=useState('');
+  const [name, setName]=useState('');
   return (
     <>
       <Header/>
-      <Map changeId={setId}/>
-      <ImagenComponente id={id}/>
+      <Map changeId={setId} changeName={setName}/>
+      <ImagenComponente id={id} name={name}/>
       <AmplifiedImages id={id}/>
       <SpeciesInfo speciesId={id}/>
       <NewsletterForm/>

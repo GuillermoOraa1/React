@@ -21,7 +21,7 @@ import React, { useState, useEffect } from "react";
   );
 } */
 
-const ComponenteImagen = ({id})=>{
+const ComponenteImagen = ({id,name})=>{
     const [url, setUrl] = useState("");
     const [login, setLoading] = useState(false);
     useEffect(() => {
@@ -30,7 +30,13 @@ const ComponenteImagen = ({id})=>{
         fetch("http://localhost:8000/photo/"+id)
         .then((res) => res.json())
         .then((data) => {
-          setUrl(data.photo);
+          if(data.photo===undefined){
+            fetch("http://localhost:8000/photo-google/icon/"+name)
+            .then((res) => res.json())
+            .then((data) => {setUrl(data.photo)});
+          } else{
+            setUrl(data.photo);
+          }         
           setLoading(false);
         });
       }

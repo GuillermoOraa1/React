@@ -1,5 +1,5 @@
-import ImagenesComponente from "./components/ImagenesComponente";
-import ImagenComponente from "./components/ImagenComponente"
+import ImagenesComponente from "./components/ImagenesComponente/ImagenesComponente.jsx";
+import ImagenComponente from "./components/ImagenComponente";
 import './App.css';
 
 function App() {

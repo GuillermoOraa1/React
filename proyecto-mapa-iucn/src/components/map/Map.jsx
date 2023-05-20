@@ -33,12 +33,18 @@ var nivelDeAmenaza="CR";
 
 
 
-const RefMap = ({changeIdAnimal}) => {
+const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
 
     const [idAnimal2, setIdAnimal2]=useState('');
+    const [nameAnimal2, setNameAnimal2]=useState('');
+
     useEffect(() => {
       changeIdAnimal(idAnimal2);
     }, [idAnimal2]);
+
+    useEffect(() => {
+      changeNameAnimal(nameAnimal2);
+    }, [nameAnimal2]);
 
     /*
     const [idAnimal, setIdAnimal]=useState('');
@@ -119,11 +125,13 @@ const RefMap = ({changeIdAnimal}) => {
                     nombreCientifico:result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0],
                     poblacion:result[0].population_trend,nombreCientificoTexto:result[0].scientific_name,
                     assementDate:result[0].assessment_date};
-
+                
                 await fetch("http://localhost:8000/photo-google/icon/"+nombrecomun)
                 .then((res) => res.json())
                 .then((data) => {
                       registro.url=data.photo;
+                      console.log("xxx");
+                      console.log(data.photo);
                 });
             }
             
@@ -296,13 +304,15 @@ const RefMap = ({changeIdAnimal}) => {
                               className: 'image'
                           });
                           let marcador= L.marker(latLong,{icon: myIcon,alt: ""});
+                          let nombreComun=datosEspecie[i]["nombreComun"];
                           marcador.bindPopup(
+                
                             L.popup().setContent(
                               `<h4>${datosEspecie[i]["nombreComun"]}</h4>
                               <img class="imagenPopup" src=${datosEspecie[i]["url"]} alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
                               <p>Scientific name: "${datosEspecie[i]["nombreCientificoTexto"]}"<br/> 
                               Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/>
-                              Population: ${datosEspecie[i]["poblacion"]}<br/><button id="mostrarDatos" onclick="clicSobreImagen(${datosEspecie[i]["taxonid"]})">See more...</button>`
+                              Population: ${datosEspecie[i]["poblacion"]}<br/><button id="mostrarDatos" onclick="clicSobreImagen(${datosEspecie[i]["taxonid"]},'${nombreComun}')">See more...</button>`
                             )
                           );
                           marcador.bindTooltip(datosEspecie[i]["nombreComun"],{direction:'bottom',permanent:true,className: 'transparent-tooltip'}).openTooltip();
@@ -454,9 +464,11 @@ const RefMap = ({changeIdAnimal}) => {
               fetchDataByCountry (paisSeleccionado);
           }
 
-          window.clicSobreImagen = (numero) => {
+          window.clicSobreImagen = (numero, nombre) => {
             omap.closePopup();
+            //nombre="Coryphaenoides rupestris";
             setIdAnimal2(numero);
+            setNameAnimal2(nombre);
             const section = document.getElementById('speciesInfo');
             if (section) {
               section.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth' });
@@ -483,13 +495,19 @@ const RefMap = ({changeIdAnimal}) => {
     
  
 
-const Mapa =({changeId})=>{
+const Mapa =({changeId,changeName})=>{
 
     const [idAnimal, setIdAnimal]=useState('');
+    const [nameAnimal, setNameAnimal]=useState('');
 
     useEffect(() => {
       changeId(idAnimal);
     }, [idAnimal]);
+
+    useEffect(() => {
+      changeName(nameAnimal);
+    }, [nameAnimal]);
+
 
     return (
       <>
@@ -499,7 +517,7 @@ const Mapa =({changeId})=>{
           <div className="contenedor">
             <div className="location-container">
               <MapContainer id="mapa" className={'mapa'} center={[12,0]} zoom={2.25} minZoom= {2.25} zoomSnap= {0.25} maxBounds= {Bounds} maxBoundsViscosity= {1.0} zoomControl={false}>
-                <RefMap changeIdAnimal={setIdAnimal}/>
+                <RefMap changeIdAnimal={setIdAnimal} changeNameAnimal={setNameAnimal}/>
                 <TileLayer
                   attribution='Mapa de prueba de la <a href="https://www.iucnredlist.org/" target="_blank">Lista Roja de Especies Amenazadas de la IUCN</a> hecho por Andres y Guillermo'
                   url="http://tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg" noWrap={true}
