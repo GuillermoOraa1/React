@@ -2,6 +2,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .contenedor{
     /* width:98%; */
@@ -75,8 +76,13 @@
 /*style de los popups*/
 
 /*style de los menus select de paises y regiones*/
+.selectoresPaises{
+    width:1220px;
+    display:inline-flex;
+    align-content:left;
+}
+
 #select-region-id{
-    margin-left:0.6em;
     width: 12em;
 }
 
@@ -131,3 +137,34 @@
     align-items: center;
 } 
 /*style del class animal control*/
+
+/*style del loading data control*/
+
+.cargandoDatos{
+    padding-top:6rem;
+}
+
+.loadingData{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loadingData label{
+    color: darkgreen;
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+.loadingData img{
+    border:3px solid green;
+    border-radius: 100px;
+}
+/*style del loading data control*/
+
+@media (max-width:400px){
+    .selectoresPaises{
+        display:flex;
+        flex-direction: column;
+    }
+}

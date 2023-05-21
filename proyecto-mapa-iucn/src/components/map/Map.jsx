@@ -10,6 +10,7 @@ import insectsIcon from  "../../assets/icons-menu/insectos.png";
 import amphibiansIcon from  "../../assets/icons-menu/anfibios-2.png";
 import birdsIcon from  "../../assets/icons-menu/aves.png";
 import fishesIcon from  "../../assets/icons-menu/peces.jpg";
+import imagenLoadingData from "../../assets/images/loading.gif";
 import './Map.css';
 import 'leaflet/dist/leaflet.css';
 
@@ -103,6 +104,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
     const fetchDataBySpecie =async(url)=>{
         var registro=null;
         var nombrecomun="";
+        var nombreParaImagen="";
         await fetch(url)
         .then((response) => response.json())
         .then(async (data) => {
@@ -116,17 +118,19 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 if (result[0].main_common_name !=null){
                     nombrecomun=result[0].main_common_name;
                 }else {
-                  var nombres=result[0].scientific_name.split(" ");
+                  let nombres=result[0].scientific_name.split(" ");
                   nombrecomun=nombres[0].concat(' ',nombres[1]);
                 }
+                var nombres=result[0].scientific_name.split(" ");
+                var nombreParaBuscarImagen=nombres[0].concat(' ',nombres[1]);
                 
 
                 registro={taxonid:result[0].taxonid,clase:result[0].class,nombreComun:nombrecomun,
                     nombreCientifico:result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0],
                     poblacion:result[0].population_trend,nombreCientificoTexto:result[0].scientific_name,
-                    assementDate:result[0].assessment_date};
+                    assementDate:result[0].assessment_date,nombreParaImagen:nombreParaBuscarImagen};
                 
-                await fetch("http://localhost:8000/photo-google/icon/"+nombrecomun)
+                await fetch("http://localhost:8000/photo-google/icon/"+nombreParaBuscarImagen)
                 .then((res) => res.json())
                 .then((data) => {
                       registro.url=data.photo;
@@ -246,6 +250,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
             //HACEMOS QUE CADA VEZ QUE SE SELECCIONE UN PAIS SE MUESTREN SUS ANIMALES
             const fetchDataByCountry = (pais)=>{
               var codigoPais=pais.isocode;
+              mostrarChargingAnimalsDataControl(true);
               consultarEspeciespais(codigoPais)
               .then((especiesPais)=>{
                   //console.log("xxx3");
@@ -303,7 +308,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                               className: 'image'
                           });
                           let marcador= L.marker(latLong,{icon: myIcon,alt: ""});
-                          let nombreComun=datosEspecie[i]["nombreComun"];
+                          //let nombreComun=datosEspecie[i]["nombreComun"];
                           marcador.bindPopup(
                 
                             L.popup().setContent(
@@ -311,7 +316,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                               <img class="imagenPopup" src=${datosEspecie[i]["url"]} alt="${datosEspecie[i]["nombreComun"]}" onerror="this.style.display='none'"/><br/>
                               <p>Scientific name: "${datosEspecie[i]["nombreCientificoTexto"]}"<br/> 
                               Assessed for The IUCN Red List since: ${new Date(datosEspecie[i]["assementDate"]).getFullYear()}<br/>
-                              Population: ${datosEspecie[i]["poblacion"]}<br/><button id="mostrarDatos" onclick="clicSobreImagen(${datosEspecie[i]["taxonid"]},'${nombreComun}')">See more...</button>`
+                              Population: ${datosEspecie[i]["poblacion"]}<br/><button id="mostrarDatos" onclick="clicSobreImagen(${datosEspecie[i]["taxonid"]},'${datosEspecie[i]["nombreParaImagen"]}')">See more...</button>`
                             )
                           );
                           marcador.bindTooltip(datosEspecie[i]["nombreComun"],{direction:'bottom',permanent:true,className: 'transparent-tooltip'}).openTooltip();
@@ -322,7 +327,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                           if(datosEspecie[i]["clase"]==="ACTINOPTERYGII") marcador.addTo(fishGroup);
                           if(datosEspecie[i]["clase"]==="AVES") marcador.addTo(birdGroup);
                       }
-      
+                      mostrarChargingAnimalsDataControl(false);
                       mostrarAnimalClassControl(true);              
                   });
 
@@ -454,13 +459,62 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                   nivelDeAmenaza="CR";  
               }
           }
-        
+
+          //AVISO DE QUE LOS DATOS DE LOS ANIMALES SE ESTAN CARGANDO
+          
+          L.Control.chargingAnimalsData = L.Control.extend({
+            //Inicializacion
+            initialize: function(options){
+                L.Util.setOptions(this,options);
+            },
+            //Opciones
+            options: {
+                position:'topleft',
+            },
+
+            onAdd: function(map) {
+                const controlDiv = L.DomUtil.create('span', 'cargandoDatos');
+                controlDiv.innerHTML=`
+                <div class="loadingData">
+                  <label>Loading data....</label>
+                  <img src=${imagenLoadingData} alt="Chameleon looking for data" width=80px height=70px/>
+                </div>
+                `;
+                controlDiv.style.width='35%';
+                //controlDiv.style.height='20px';
+                controlDiv.style.backgroundColor='transparent';
+                controlDiv.style.textAlign='center';
+                //controlDiv.style.border='3px solid green';
+                //controlDiv.style.borderRadius='16px';
+                //controlDiv.style.marginLeft='20%';
+                //controlDiv.style.marginRight='20%';
+                //controlDiv.style.marginTop='0px';
+                return controlDiv;
+            },
+
+            onRemove: function(map) {},
+          });
+
+          var chargingAnimalsData= new L.Control.chargingAnimalsData();
+
+          function mostrarChargingAnimalsDataControl(arg){
+              if(arg===true){
+                chargingAnimalsData.addTo(omap);
+              }
+              if(arg===false){
+                  omap.removeControl(chargingAnimalsData);    
+              }
+          }
+
+
+
+          //MENU PARA MODIFICAR EL NIVEL DE AMENAZA SELECCIONADO
           window.modificarNivelDeAmenaza=(nivel)=>{
               nivelDeAmenaza=nivel;
               mostrarAnimalClassControl(false);
               fetchDataByCountry (paisSeleccionado);
           }
-
+          //ACCIONES QUE PASAN CUANDO PINCHAS EN EL BOTON DEL POPUP DEL BICHO
           window.clicSobreImagen = (numero, nombre) => {
             omap.closePopup();
             //nombre="Coryphaenoides rupestris";
@@ -506,9 +560,12 @@ const Mapa =({changeId,changeName})=>{
 
     return (
       <>
-        <select name="select-region" id="select-region-id"></select>
-        <select name="select-pais" id="select-pais-id"></select>
+
         <div className="principal">
+          <div className="selectoresPaises">
+            <select name="select-region" id="select-region-id"></select>
+            <select name="select-pais" id="select-pais-id"></select>
+          </div>
           <div className="contenedor">
             <div className="location-container">
               <MapContainer id="mapa" className={'mapa'} center={[13,0]} zoom={2.25} minZoom= {2.25} zoomSnap= {0.25} maxBounds= {Bounds} maxBoundsViscosity= {1.0} zoomControl={false}>

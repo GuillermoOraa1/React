@@ -23,7 +23,7 @@ import React, { useState, useEffect } from "react";
 
 const ComponenteImagen = ({id,name,open})=>{
     const [url, setUrl] = useState("");
-    const [login, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
       if(id){
         setLoading(true);
@@ -44,7 +44,8 @@ const ComponenteImagen = ({id,name,open})=>{
 
     return(
     <>
-        {!login && id &&(<img src={url} width="170px" height="auto" onClick={() => open(true)} />)}
+        {loading && <p>Cargando imagen...</p>}
+        {!loading && id &&(<img src={url} width="170px" height="auto" onClick={() => open(true)} />)}
     </>
     );
 }

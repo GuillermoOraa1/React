@@ -8,8 +8,7 @@
     padding-bottom:1rem;
 }
 .description{
-    /* width:60%; */
-    /* background-color:orange; */
+
 }
 .description p{
     font-size:0.7rem;
@@ -19,7 +18,8 @@
 
 .rrss{
     display:inline-flex;
-    line-height:0.05rem;
+    flex-direction: column;
+    /* line-height:0.05rem; */
     /* background-color:blue; */
     font-size:0.7rem;
 }
@@ -29,4 +29,30 @@
 }
 .rrss a{
     padding-left:1rem; 
+}
+
+@media (max-width:820px){
+  
+    .description p{
+        line-height:unset;
+    }
+
+    .rrss{
+        display:inline-flex;
+        flex-direction:column;
+        margin-right:0.5rem;
+        line-height:unset;
+        font-size:0.7rem;
+    }
+}
+
+@media (max-width:676px){
+    .rrss-icons{
+        display:inline-flex;
+        flex-direction:column;
+    }
+
+    .rrss-icons a{
+        margin-top:1.5em;
+    }
 }

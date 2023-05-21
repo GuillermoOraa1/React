@@ -43,3 +43,19 @@
     color:grey;
     font-weight:bolder;
 }
+
+@media (max-width:550px){
+    /*TODO colocar los elementos correctamente para la vista de movil*/
+    .animalImage{
+        width:100%;
+    }
+    .arrow-left{
+        position:relative;
+    }
+    .arrow-right{
+        position:relative;
+    }
+    .buttonClose{
+
+    }
+}
