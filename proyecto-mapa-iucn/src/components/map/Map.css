@@ -6,13 +6,13 @@
 }
 .contenedor{
     /* width:98%; */
-    height:705px;
+    height:605px;
     width:1220px;
     border: solid 3px black;
 }
 .mapa{
     /*height: 800px;*/
-    height: 700px !important;
+    height: 600px !important;
     width: 100%;
 }
 
@@ -23,16 +23,17 @@
 .transparent-tooltip {
     border: none;
     box-shadow: none;
-    height: 20px; 
+    display: flex;
+    align-items: center;
 }
 
 .transparent-tooltip::before {
     border: none;
 } 
 
-/* .leaflet-tooltip{
-    padding:0 !important;
-} */
+.leaflet-tooltip{
+    padding:1px !important;
+} 
 
 .leaflet-tooltip-bottom {
     margin-top: 6px;
@@ -141,7 +142,7 @@
 /*style del loading data control*/
 
 .cargandoDatos{
-    padding-top:6rem;
+    padding-top:4rem;
 }
 
 .loadingData{
@@ -150,7 +151,7 @@
     flex-direction: column;
 }
 
-.loadingData label{
+.loadingData p{
     color: darkgreen;
     font-size: 2em;
     font-weight: bolder;
@@ -162,9 +163,68 @@
 }
 /*style del loading data control*/
 
-@media (max-width:400px){
+@media (max-width:440px){
+
+    .contenedor{
+        /* width:98%; */
+        height:605px;
+        width:98%;
+    }
+    .mapa{
+        /*height: 800px;*/
+        height: 600px !important;
+        width: 100%;
+    }
+
+/*style de los menus select de paises y regiones*/    
     .selectoresPaises{
         display:flex;
         flex-direction: column;
     }
+/*style de los menus select de paises y regiones*/
+
+/*style del threat animal control*/
+    .nivelAmenaza{
+        width:45% !important;
+        height:60px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .nivelAmenaza br{
+        display: none; 
+    }
+    .nivelAmenaza label{
+        margin: unset; 
+        width: 95%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+/*style del threat animal control*/
+
+/*style del class animal control*/
+    .leaflet-control-layers-expanded{
+        width: 60% !important;
+    }
+    .leaflet-control-layers-overlays{
+        display:grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 33% 33% 33%;
+    }
+    .leaflet-control-layers-overlays label>span>span>img{
+        display:none;
+    }
+
+/*style del class animal control*/
+
+/*style del loading data control*/
+
+    .cargandoDatos{
+        padding-top:1rem;
+    }
+
+/*style del loading data control*/
+
 }

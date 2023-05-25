@@ -40,22 +40,53 @@
     font-size:1.5em;
     background-color:transparent; 
     border-color:transparent;
-    color:grey;
+    color:red;
     font-weight:bolder;
 }
 
 @media (max-width:550px){
     /*TODO colocar los elementos correctamente para la vista de movil*/
+    .MuiPaper-root{
+        width: 100%;
+        margin: unset !important;
+    }
+    .container{
+
+    }
     .animalImage{
         width:100%;
     }
     .arrow-left{
-        position:relative;
+        position: fixed;
+        left: 5%;
+        top: 45%;
     }
-    .arrow-right{
-        position:relative;
+    .arrow-right{    
+        position: fixed;
+        left: 80%;
+        top: 45%;
     }
     .buttonClose{
+        position: fixed;
+        left: 250px;
+        top: 220px;
+    }
+}
 
+@media (max-width:440px){
+    .arrow-left{
+        position: fixed;
+        left: 5%;
+        top: 45%;
+    }
+    .arrow-right{    
+        position: fixed;
+        left: 90%;
+        top: 45%;
+    }
+    .buttonClose{
+        position: fixed;
+        left: 310px;
+        top: 140px;
     }
 }

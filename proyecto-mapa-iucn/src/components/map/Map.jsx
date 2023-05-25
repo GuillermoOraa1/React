@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect} from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer,Marker, Popup, useMap, GeoJSON, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer,useMap} from 'react-leaflet';
 import countries_geojson from './docs/countries.geo.json';
 import data from './docs/countries-list.json';
 import IUCNlogo from "../../assets/images/IUCN_Red_List-2.png";
@@ -73,15 +73,15 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
     const consultarEspeciespais = async(texto)=>{
       const mySet1 = new Set();
       var url="http://apiv3.iucnredlist.org/api/v3/country/getspecies/"+texto+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
-      const funcion=await fetch(url)
+      await fetch(url)
           .then((response) => response.json())
           .then((data) => { 
           const {result}=data;
           result.map((registro)=>{
-              if(registro.category==nivelDeAmenaza) {
+              if(registro.category===nivelDeAmenaza) {
                   mySet1.add("http://apiv3.iucnredlist.org/api/v3/species/id/"+registro.taxonid+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee");
               };
-
+              return "";
           });
       }).catch(error=>{console.log(error)});
 
@@ -104,7 +104,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
     const fetchDataBySpecie =async(url)=>{
         var registro=null;
         var nombrecomun="";
-        var nombreParaImagen="";
         await fetch(url)
         .then((response) => response.json())
         .then(async (data) => {
@@ -234,7 +233,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
               if(omap.getZoom() <8 && !omap.hasLayer(fronteras)){
                 fronteras.addTo(omap); 
               }
-              if(omap.getZoom() <(zoom1-2)){
+              if(omap.getZoom() <(zoom1-1)){
                 mostrarAnimalClassControl(false);
                 mostrarAnimalThreatLevelSelector(false);
               }
@@ -476,7 +475,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 const controlDiv = L.DomUtil.create('span', 'cargandoDatos');
                 controlDiv.innerHTML=`
                 <div class="loadingData">
-                  <label>Loading data....</label>
+                  <p>Our littel chameleon<br>is looking for....</p>
                   <img src=${imagenLoadingData} alt="Chameleon looking for data" width=80px height=70px/>
                 </div>
                 `;

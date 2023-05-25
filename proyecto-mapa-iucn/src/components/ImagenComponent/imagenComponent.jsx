@@ -30,7 +30,7 @@ const ComponenteImagen = ({id,name,open})=>{
         fetch("http://localhost:8000/photo/"+id)
         .then((res) => res.json())
         .then((data) => {
-          if(data.photo===undefined){
+          if(data.photo===""){
             fetch("http://localhost:8000/photo-google/icon/"+name)
             .then((res) => res.json())
             .then((data) => {setUrl(data.photo)});

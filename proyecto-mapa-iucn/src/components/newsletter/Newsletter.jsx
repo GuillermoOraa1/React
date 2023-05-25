@@ -8,7 +8,7 @@ const NewsletterForm=()=>{
 
   const enviarSuscripción=(event)=>{
       event.preventDefault();
-      //console.log("Hola2");
+      
         fetch("http://localhost:8000/suscription/",{
           method: "POST",
         headers: {
@@ -18,7 +18,7 @@ const NewsletterForm=()=>{
       })
       .then((response) => response.json())
       .then((data) => {
-        setMessage("Email contact add successfully!")
+        setMessage("Email contact add successfully!");
       })
       .catch((error) => {
         console.error("Error sending email:", error);

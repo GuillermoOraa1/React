@@ -16,11 +16,11 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      {/* <Header/> */}
+      <Header/>
       <Map changeId={setId} changeName={setName}/>
       <ImagenComponente id={id} name={name} open={setIsOpen}/>
       <AmplifiedImages name={name} handleClose={() => setIsOpen(false)} isOpen={isOpen}/>
-      <SpeciesInfo speciesId={id}/>
+      {id && <SpeciesInfo speciesId={id}/>}
       <NewsletterForm/>
       <Partnership/>
       <Footer/>

@@ -11,8 +11,6 @@ app.use(express.json());
 app.use(cors());
 
 
-
-
 app.use('/suscription', suscriptionRouter);
 app.use('/photo-google', photosGoogleRouter);
 app.use('/photo', photosIucnRouter);

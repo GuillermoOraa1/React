@@ -10,7 +10,7 @@ appPhoto.use(cors());
 const buscarImagen=async (url) => {
     try {
       // Abro una instancia del puppeteer y accedemos a la url 
-      const browser = await puppeteer.launch() ;
+      const browser = await puppeteer.launch({headless: 'new',}) ;
       const page = await browser.newPage();
       const response = await page.goto(url,{
           waitUntil: 'networkidle0',
@@ -32,7 +32,13 @@ const buscarImagen=async (url) => {
         }
       });
       return attrsHREF; */
-      return document.querySelectorAll('.featherlight__gallery__image')[0].href;
+      if(document.querySelectorAll('.featherlight__gallery__image')[0]){
+        return document.querySelectorAll('.featherlight__gallery__image')[0].href;
+      }else{
+        return "";
+      }
+      
+      
   
     } catch (error) {
       console.error(error);
