@@ -16,6 +16,7 @@ const header =()=>{
             
             <div className="text">
                 <div className="title">
+                    <img className="IUCN_logo_movil" src={IUCNlogo} alt="IUCN logo" width="80px" height="80px" />
                     <h1>The IUCN Red List of Threatened Species</h1>
                 </div>
                 <div className="listOfSpecies">
@@ -23,12 +24,6 @@ const header =()=>{
                         <h4>More than 42,100 species are threatened with extinction.</h4>
                         <h4>That is still 28% of all assessed species.</h4>
                     </div>
-                    {/* <div className="loginForm">
-                        <form action="#">
-                            <label htmlFor="user">User:</label> <input type="text" name="user" />
-                            <label htmlFor="password">Password:</label> <input type="password" name="password" />
-                        </form>
-                    </div> */}
                 </div>
 
                 <div className="listOfSpecies-icons">

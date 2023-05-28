@@ -27,11 +27,11 @@ const ComponenteImagen = ({id,name,open})=>{
     useEffect(() => {
       if(id){
         setLoading(true);
-        fetch("http://localhost:8000/photo/"+id)
+        fetch(`http://localhost:8000/photo/${id}`)
         .then((res) => res.json())
         .then((data) => {
           if(data.photo===""){
-            fetch("http://localhost:8000/photo-google/icon/"+name)
+            fetch(`http://localhost:8000/photo-google/icon/${name}`)
             .then((res) => res.json())
             .then((data) => {setUrl(data.photo)});
           } else{
@@ -40,12 +40,12 @@ const ComponenteImagen = ({id,name,open})=>{
           setLoading(false);
         });
       }
-    }, [id]);
+    }, [id,name]);
 
     return(
     <>
         {loading && <p>Cargando imagen...</p>}
-        {!loading && id &&(<img src={url} width="170px" height="auto" onClick={() => open(true)} />)}
+        {!loading && id &&(<img src={url} alt="" width="170px" height="auto" onClick={() => open(true)} />)}
     </>
     );
 }

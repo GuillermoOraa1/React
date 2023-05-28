@@ -3,6 +3,8 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top:1%;
+    margin-bottom:1%;
 }
 .contenedor{
     /* width:98%; */
@@ -180,6 +182,7 @@
     .selectoresPaises{
         display:flex;
         flex-direction: column;
+        width: 98%;
     }
 /*style de los menus select de paises y regiones*/
 

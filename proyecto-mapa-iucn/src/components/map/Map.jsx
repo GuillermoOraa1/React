@@ -475,7 +475,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 const controlDiv = L.DomUtil.create('span', 'cargandoDatos');
                 controlDiv.innerHTML=`
                 <div class="loadingData">
-                  <p>Our littel chameleon<br>is looking for....</p>
+                  <p>Our little chameleon<br>is looking for....</p>
                   <img src=${imagenLoadingData} alt="Chameleon looking for data" width=80px height=70px/>
                 </div>
                 `;
