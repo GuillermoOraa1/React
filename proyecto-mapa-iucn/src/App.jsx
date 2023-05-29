@@ -1,28 +1,27 @@
 import {useState} from "react";
+import {Routes, Route } from "react-router-dom";
 import Header from './components/header/Header';
+import Searcher from './components/searcher/Searcher';
 import Footer from './components/footer/Footer';
-import Map from './components/map/Map';
-import Partnership from './components/partnership/Partnership';
-import ImagenComponente from "./components/ImagenComponent/imagenComponent";
-import NewsletterForm from "./components/newsletter/Newsletter";
-import SpeciesInfo from "./components/pages/SpeciesInfo";
-import AmplifiedImages from "./components/amplifiedImagesComponent/AmplifiedImagesComponent";
+import Home from './components/layout/Home';
+import Results from './components/layout/Results';
+
+
+
 
 import './App.css';
 
 function App() {
-  const [id, setId]=useState('');
+  const [taxonidId, setTaxonidId]=useState('');
   const [name, setName]=useState('');
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <Header/>
-      <Map changeId={setId} changeName={setName}/>
-      <ImagenComponente id={id} name={name} open={setIsOpen}/>
-      <AmplifiedImages name={name} handleClose={() => setIsOpen(false)} isOpen={isOpen}/>
-      {id && <SpeciesInfo speciesId={id}/>}
-      <NewsletterForm/>
-      <Partnership/>
+      <Searcher changeTaxonid={setTaxonidId} changeName={setName}/>
+      <Routes>
+        <Route index element={<Home />} ></Route>
+        <Route path="/search" element={<Results taxonid={taxonidId} name={name}/>} ></Route>
+      </Routes>
       <Footer/>
     </>
   );
