@@ -23,15 +23,18 @@ const SpeciesInfo = ({ speciesId }) => {
         {speciesData &&
         <>
           <h2>{speciesData.scientific_name}</h2>
+          <hr className="separatorRojo" /> {/* Añade esta línea */}
           <p>{speciesData.main_common_name}</p>
-          <p><strong>Estado:</strong> {speciesData.category}</p>
-          <p><strong>Reino:</strong> {speciesData.kingdom}</p>
-          <p><strong>Filum:</strong> {speciesData.phylum}</p>
-          <p><strong>Clase:</strong> {speciesData.class}</p>
-          <p><strong>Orden:</strong> {speciesData.order}</p>
-          <p><strong>Familia:</strong> {speciesData.family}</p>
-          <p><strong>Género:</strong> {speciesData.genus}</p>
-          <p><strong>Razón de amenaza:</strong> {speciesData.amended_reason}</p>
+          <hr className="separatorGris" />
+          <p><strong>Status:</strong> {speciesData.category}</p>
+          <p><strong>Kingdom:</strong> {speciesData.kingdom}</p>
+          <p><strong>Phylum:</strong> {speciesData.phylum}</p>
+          <p><strong>Class:</strong> {speciesData.class}</p>
+          <p><strong>Order:</strong> {speciesData.order}</p>
+          <p><strong>Family:</strong> {speciesData.family}</p>
+          <p><strong>Genus:</strong> {speciesData.genus}</p>
+          <p><strong>Published year:</strong> {speciesData.assessor}</p>
+          <p><strong>Published year2:</strong> {speciesData.conservationmeasures}</p>
           <WikiComponent scientificName={speciesData.scientific_name}/>          
         </>
         }

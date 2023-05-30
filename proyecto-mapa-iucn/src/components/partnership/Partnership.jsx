@@ -17,7 +17,7 @@ import './Partnership.css';
 const partnership =()=>{
     return(
         <>
-            <p className='partnershipTitle'>THE RED LIST PARTNERSHIP</p>
+            <p className='partnershipTitle'>THE IUCN RED LIST PARTNERSHIP</p>
             <div className='partnership'>
                 <div className='partner'><a href="https://www.iucn.org/" target='_blank' rel="noreferrer"><img src={iucn} alt="logo IUCN" width="65px"/></a></div>
                 <div className='partner'><a href="https://www.iucn.org/our-union/commissions/species-survival-commission" target='_blank' rel="noreferrer"><img src={ssc} alt="logo Species Survival Commision" width="100px"/></a></div>

@@ -16,12 +16,12 @@ const WikiComponent = ({ scientificName }) => {
                 setExists(true);
             }
         });
-      }, [scientificName]);
+      }, [scientificName,urlWiki]);
     
 
     return (
         <>
-            {exists && <p>Enlace de Wikipedia: <a href={urlWiki} target="_blank" rel="noreferrer">{scientificName}</a></p>}
+            {exists && <p>Wikipedia: <a href={urlWiki} target="_blank" rel="noreferrer">{scientificName}</a></p>}
         </>
     );
 };

@@ -45,7 +45,7 @@ const ComponenteImagen = ({id,name,open})=>{
     return(
     <>
         {loading && <p>Cargando imagen...</p>}
-        {!loading && id &&(<img src={url} alt="" width="170px" height="auto" onClick={() => open(true)} />)}
+        {!loading && id &&(<img src={url} alt="" onClick={() => open(true)} />)}
     </>
     );
 }

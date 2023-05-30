@@ -1,0 +1,46 @@
+.container-newsletter{
+    width:100%;
+    
+    display:flex;
+}
+
+.parrot-image{
+    width:150px;
+    height:8rem;
+}
+
+.newsletter{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'roboto';
+    color:white;
+    background-color:#DA2A1C;
+    border-radius:50px;
+}
+
+.newsletter h5{
+    margin-top:1rem;
+    margin-bottom:1rem;
+}
+
+.newsletter-label{
+    margin-right:2rem;
+}
+.newsletter-label input{
+    margin-left:0.5rem;
+    font-family: sans-serif;
+}
+
+.newsletter-button{
+    border-radius:40px;
+    background-color:white;
+    padding-left:1rem;
+    padding-right:1rem;
+    border:none;
+}
+
+.newsletter-message{
+    padding-top:1rem;
+}

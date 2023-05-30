@@ -36,25 +36,6 @@ var nivelDeAmenaza="CR";
 
 const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
 
-    const [idAnimal2, setIdAnimal2]=useState('');
-    const [nameAnimal2, setNameAnimal2]=useState('');
-
-    useEffect(() => {
-      changeIdAnimal(idAnimal2);
-    }, [idAnimal2]);
-
-    useEffect(() => {
-      changeNameAnimal(nameAnimal2);
-    }, [nameAnimal2]);
-
-    /*
-    const [idAnimal, setIdAnimal]=useState('');
-
-    useEffect(() => {
-      changeId(idAnimal);
-    }, [idAnimal]);
-    */
-
     const {results,paises}=data;
 
     const cargarSelectPaises=(identificadorRegion)=>{
@@ -517,8 +498,8 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
           window.clicSobreImagen = (numero, nombre) => {
             omap.closePopup();
             //nombre="Coryphaenoides rupestris";
-            setIdAnimal2(numero);
-            setNameAnimal2(nombre);
+            changeIdAnimal(numero);
+            changeNameAnimal(nombre);
             const section = document.getElementById('speciesInfo');
             if (section) {
               section.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth' });
@@ -533,6 +514,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
           };
 
         }
+    // eslint-disable-next-line    
     }, [omap]);
     
     return null;
@@ -545,18 +527,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
 
 const Mapa =({changeId,changeName})=>{
 
-    const [idAnimal, setIdAnimal]=useState('');
-    const [nameAnimal, setNameAnimal]=useState('');
-
-    useEffect(() => {
-      changeId(idAnimal);
-    }, [idAnimal]);
-
-    useEffect(() => {
-      changeName(nameAnimal);
-    }, [nameAnimal]);
-
-
     return (
       <>
 
@@ -568,7 +538,7 @@ const Mapa =({changeId,changeName})=>{
           <div className="contenedor">
             <div className="location-container">
               <MapContainer id="mapa" className={'mapa'} center={[13,0]} zoom={2.25} minZoom= {2.25} zoomSnap= {0.25} maxBounds= {Bounds} maxBoundsViscosity= {1.0} zoomControl={false}>
-                <RefMap changeIdAnimal={setIdAnimal} changeNameAnimal={setNameAnimal}/>
+                <RefMap changeIdAnimal={changeId} changeNameAnimal={changeName}/>
                 <TileLayer
                   attribution='Mapa de prueba de la <a href="https://www.iucnredlist.org/" target="_blank">Lista Roja de Especies Amenazadas de la IUCN</a> hecho por Andres y Guillermo'
                   url="http://tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg" noWrap={true}

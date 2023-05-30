@@ -1,0 +1,15 @@
+.species-habitats {
+    padding: 20px;
+    color: #333;
+  }
+  
+  .species-habitats h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .species-habitats p {
+    line-height: 1.5;
+    color: #666;
+  }
+  
