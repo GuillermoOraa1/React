@@ -1,7 +1,8 @@
 .container-newsletter{
     width:100%;
-    
     display:flex;
+    margin-top:1rem;
+    margin-bottom:1rem;
 }
 
 .parrot-image{
@@ -16,8 +17,11 @@
     align-items: center;
     font-family: 'roboto';
     color:white;
-    background-color:#DA2A1C;
     border-radius:50px;
+    background-color:#DA2A1C;
+    background-repeat: no-repeat;
+    background-image: url("../../assets/images/newsletter/rainforest.PNG");
+    background-size:contain;
 }
 
 .newsletter h5{
@@ -31,11 +35,13 @@
 .newsletter-label input{
     margin-left:0.5rem;
     font-family: sans-serif;
+    border-radius:10px;
 }
 
 .newsletter-button{
-    border-radius:40px;
-    background-color:white;
+    height:2rem; 
+    widht:3rem;
+    border-radius:20%;
     padding-left:1rem;
     padding-right:1rem;
     border:none;
@@ -43,4 +49,13 @@
 
 .newsletter-message{
     padding-top:1rem;
+    font-size:1.2rem;
+    text-align:center;
 }
+
+/* .newsletter-result-image{
+    border-radius:50%;
+    widht:6rem;
+    height:6rem;
+    margin-left:3rem;
+} */

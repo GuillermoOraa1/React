@@ -1,5 +1,9 @@
 import React, { useState} from 'react';
 import { useNavigate } from "react-router-dom";
+//import rightHamster from "../../assets/images/searcher/hamster.PNG";
+import rightnutria from "../../assets/images/searcher/nutria.PNG";
+import leftFox from "../../assets/images/searcher/fox.PNG";
+import iconSearch from "../../assets/images/searcher/searcher_icon.png";
 import './Searcher.css';
 
 const Searcher =({changeTaxonid,changeName})=>{
@@ -35,13 +39,18 @@ const Searcher =({changeTaxonid,changeName})=>{
     
 
     return(
-        <>
-            <form action="" onSubmit={searchAnimal}>
-                <input type="text" name="scientific_name" id="Scientific_name" />
-                <input type="submit" value="Search"/>
-            </form>
-            {taxonid==="Error" && (<p>We dont have any record of this species </p>)}
-        </>
+        <div className='container-searcher'>
+            <img className="smell-image" src={leftFox} alt="wolf" />
+            <div className="searcher">
+              <h5>Look for any species using its scientific name.</h5>
+              <form action="" onSubmit={searchAnimal}>
+                <input className="searcher-input" type="text" name="scientific_name" id="Scientific_name" size="35" />
+                <button type="submit" className="searcher-button"><img src={iconSearch} alt="icon search" width="30px" height="22px"/></button>
+              </form>
+              {taxonid==="Error" && (<p className="searcher-message">We dont have any record of this species </p>)}
+            </div>
+            <img className="smell-image" src={rightnutria} alt="wolf" />
+        </div>
     );
 }
 

@@ -1,0 +1,16 @@
+.extinctList-container{
+    background-color:#DA2A1C;
+    color: #FFF;
+    font-family: 'roboto';
+    margin-top:1rem;
+    margin-bottom:1rem;
+}
+#title{
+    width:100%;
+    text-align:center;
+}
+
+.css-ta95xa-MuiImageListItem-root .MuiImageListItem-img{
+    object-fit:fill !important;
+    height:174px !important;
+}
