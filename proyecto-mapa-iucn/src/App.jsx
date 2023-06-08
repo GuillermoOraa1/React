@@ -16,11 +16,12 @@ function App() {
   const [taxonidId, setTaxonidId]=useState('');
   const [name, setName]=useState('');
   const [focus, setFocus]=useState(false);
+  
+
   return (
     <>
-      <Header changeFocus={setFocus}/>
-      {/* <ExtinctList focus={focus} /> */}
-      <ExtinctList />
+      <Header focus={focus} changeFocus={setFocus}/>
+      <ExtinctList focus={focus} />
       <Searcher changeTaxonid={setTaxonidId} changeName={setName}/>
       <Routes>
         <Route index element={<Home />} ></Route>

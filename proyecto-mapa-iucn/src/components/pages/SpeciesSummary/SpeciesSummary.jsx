@@ -15,10 +15,6 @@ const SpeciesSummary = ({ speciesId }) => {
       setSpeciesDescription(response.data.result[0].taxonomicnotes);
       setSpeciesDistribution(response.data.result[0].rationale)
       setLoading(true);
-/*    const response= await fetch("https://apiv3.iucnredlist.org/api/v3/species/narrative/id/"+speciesId+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee");
-      const data = await response.json();
-      setSpeciesSummary(data.result[0].taxonomicnotes); */
-
     };
 
     fetchSpeciesSummary();

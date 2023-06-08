@@ -1,0 +1,8 @@
+.image-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+.centered-image {
+    margin-left: 15px; 
+  }

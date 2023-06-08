@@ -104,6 +104,14 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 var nombres=result[0].scientific_name.split(" ");
                 var nombreParaBuscarImagen=nombres[0].concat(' ',nombres[1]);
                 
+                if (result[0].main_common_name !=null){
+                  //console.log("http://localhost:8000/animals/"+result[0].main_common_name.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
+                  fetch("http://localhost:8000/animals/"+result[0].main_common_name.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
+                }else{
+                  //console.log("http://localhost:8000/animals/"+nombreParaBuscarImagen.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
+                  fetch("http://localhost:8000/animals/"+nombreParaBuscarImagen.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
+                }
+                
 
                 registro={taxonid:result[0].taxonid,clase:result[0].class,nombreComun:nombrecomun,
                     nombreCientifico:result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0],
