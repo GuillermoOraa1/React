@@ -5,7 +5,7 @@ import {AveCollection,InsectsCollection} from './ImportedImages';
 //import blackRibbon from '../../assets/images/extincts/blackRibbon.png'
 import './extinctList.css';
 
-const ExtinctList =({focus})=>{
+const ExtinctList =({focus, family})=>{
 
     const { pathname } = useLocation();
     const [randomImages, setRandomImages] = useState([]);
@@ -16,23 +16,25 @@ const ExtinctList =({focus})=>{
     }
     
     useEffect(() => {
-        if(focus===true)setRandomImages(selectRandomImages(InsectsCollection));
-    },[focus]); 
+        if(focus===true){
+            if(family==='insects')setRandomImages(selectRandomImages(InsectsCollection));
+            if(family==='aves')setRandomImages(selectRandomImages(AveCollection));
+        }
+        
+    },[focus, family]); 
     
 
     return(
         <div className='extinctList-container' style={{ display: pathname !== '/' ? 'none' : 'block' }}>
-            {/* {focus && <p>Some friends lost in the way</p>}    */}
-            {/* <button onClick={handleChange}>Cambiar</button> */}
             <Collapse in={focus} timeout={1000}>
                 <h4 id="title">Some friends lost in the way</h4>
                 <Stack spacing={4}>
                 <Grow in={focus} timeout={2000}>
                 <ImageList sx={{ width: "100%", paddingLeft:"40px", paddingRight:"40px" }} cols={4}>
-                    {randomImages.map((ave) => (
-                    <ImageListItem key={ave.nombre}>
-                        <img src={ave.imagen} alt={ave.nombre} width="54px" height="154px" loading="lazy" objectFit="fill"/>
-                        <ImageListItemBar title={ave.nombre} subtitle={`Extinghised in ${ave.year}`}/> 
+                    {randomImages.map((animal) => (
+                    <ImageListItem key={animal.nombre}>
+                        <img src={animal.image} alt={animal.name} width="54px" height="154px" loading="lazy" objectFit="fill"/>
+                        <ImageListItemBar title={animal.name} subtitle={`Extinghised in ${animal.year}`}/> 
                     </ImageListItem>
                     ))}
                 </ImageList>

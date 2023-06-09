@@ -9,8 +9,11 @@ app.get('/:CommonName/:ScientificName', async(req, res) => {
         let animal=new animalSchema();
         animal.name=req.params.CommonName;
         animal.scientificName=req.params.ScientificName;
-        animal.save();
-        res.status(200).json({ success: true});
+        const recoveredAnimal=await animalSchema.findOne({ name:animal.name })
+        if (!recoveredAnimal) {
+            animal.save();
+            res.status(200).json({ success: true});
+        }
     }catch(err){
         res.status(400).json({ success: false, message: err.message });
     }

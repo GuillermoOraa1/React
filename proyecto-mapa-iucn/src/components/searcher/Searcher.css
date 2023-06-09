@@ -44,6 +44,20 @@
     border-radius:10px;
 }
 
+.input-container{
+    width:50%;
+    display:flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.searcher-input-in-container{
+    width:98%;
+    margin-right:0.5rem;
+    font-family: sans-serif;
+    border-radius:10px;
+}
+
 .searcher-button{
     height:2rem; 
     widht:3rem;

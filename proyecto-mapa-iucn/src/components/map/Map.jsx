@@ -74,8 +74,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
         for (const ruta of rutas) {
             const registro=await fetchDataBySpecie(ruta);
             if(registro!==null){
-                //console.log(registro);
-                //console.log("xxx4");
                 respuesta.push(registro);
             }
         }
@@ -105,10 +103,8 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 var nombreParaBuscarImagen=nombres[0].concat(' ',nombres[1]);
                 
                 if (result[0].main_common_name !=null){
-                  //console.log("http://localhost:8000/animals/"+result[0].main_common_name.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
                   fetch("http://localhost:8000/animals/"+result[0].main_common_name.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
                 }else{
-                  //console.log("http://localhost:8000/animals/"+nombreParaBuscarImagen.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
                   fetch("http://localhost:8000/animals/"+nombreParaBuscarImagen.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
                 }
                 
