@@ -16,3 +16,13 @@
     height:300px;
     padding-top:20px;
 }
+
+@media (max-width:440px){
+    .info-container {
+        display: flex !important; 
+        flex-direction: column !important;
+    }
+    .info-container img{
+        width:100% !important;
+    }
+}

@@ -43,11 +43,11 @@ const Header =({focus,family,changeFocus,changeFamily})=>{
                 </div>
 
                 <div className="listOfSpecies-icons">
-                    <span><p>AMPHIBIANS <strong>41%</strong></p><img src={amphibiansImage} alt="Amphibians icon"  width="45px" height="55px"/></span>
-                    <span><p>MAMMALS <strong>27%</strong></p><img src={mammalsImage} alt="Mammals icon"  width="70px" height="60px"/></span>
+                    <span onClick={()=>showPhotos('amphibians')}><p>AMPHIBIANS <strong>41%</strong></p><img src={amphibiansImage} alt="Amphibians icon"  width="45px" height="55px"/></span>
+                    <span onClick={()=>showPhotos('mammals')}><p>MAMMALS <strong>27%</strong></p><img src={mammalsImage} alt="Mammals icon"  width="70px" height="60px"/></span>
                     <span onClick={()=>showPhotos('aves')}><p>BIRDS <strong>13%</strong></p><img src={birdsImage} alt="Birds icon"  width="60px" height="50px"/></span>
-                    <span><p>REPTILES <strong>21%</strong></p><img src={reptilesImage} alt="Reptiles icon"  width="80px" height="60px"/></span>
-                    <span><p>FISHES <strong>55%</strong></p><img src={fishesImage} alt="Fishes icon"  width="80px" height="60px"/></span>
+                    <span onClick={()=>showPhotos('reptiles')}><p>REPTILES <strong>21%</strong></p><img src={reptilesImage} alt="Reptiles icon"  width="80px" height="60px"/></span>
+                    <span onClick={()=>showPhotos('fishes')}><p>FISHES <strong>55%</strong></p><img src={fishesImage} alt="Fishes icon"  width="80px" height="60px"/></span>
                     <span onClick={()=>showPhotos('insects')}><p>INSECTS <strong>40%</strong></p><img src={insectsImage} alt="Insects icon"  width="50px" height="50px"/></span> 
                 </div>
             </div>

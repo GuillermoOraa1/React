@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useLocation} from "react-router-dom";
 import {Stack, ImageList, ImageListItem, ImageListItemBar, Collapse, Grow} from '@mui/material';
-import {AveCollection,InsectsCollection} from './ImportedImages';
+import {AveCollection,InsectsCollection,MammalsCollection,AmphibiansCollection,ReptileCollection,FishesCollection} from './ImportedImages';
 //import blackRibbon from '../../assets/images/extincts/blackRibbon.png'
 import './extinctList.css';
 
@@ -19,6 +19,10 @@ const ExtinctList =({focus, family})=>{
         if(focus===true){
             if(family==='insects')setRandomImages(selectRandomImages(InsectsCollection));
             if(family==='aves')setRandomImages(selectRandomImages(AveCollection));
+            if(family==='amphibians')setRandomImages(selectRandomImages(AmphibiansCollection));
+            if(family==='mammals')setRandomImages(selectRandomImages(MammalsCollection));
+            if(family==='reptiles')setRandomImages(selectRandomImages(ReptileCollection));
+            if(family==='fishes')setRandomImages(selectRandomImages(FishesCollection));
         }
         
     },[focus, family]); 

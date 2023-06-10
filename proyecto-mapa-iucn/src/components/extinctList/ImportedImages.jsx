@@ -17,6 +17,95 @@ import imageInsect5 from '../../assets/images/extincts/insects/insect5.jpg';
 import imageInsect6 from '../../assets/images/extincts/insects/insect6.jpg';
 import imageInsect7 from '../../assets/images/extincts/insects/insect7.jpg';
 
+import imageMammal1 from '../../assets/images/extincts/mammals/mammal1.jpg';
+import imageMammal2 from '../../assets/images/extincts/mammals/mammal2.jpg';
+import imageMammal3 from '../../assets/images/extincts/mammals/mammals3.jpg';
+import imageMammal4 from '../../assets/images/extincts/mammals/mammals4.jpg';
+import imageMammal5 from '../../assets/images/extincts/mammals/mammals5.jpg';
+import imageMammal6 from '../../assets/images/extincts/mammals/mammals6.jpg';
+import imageMammal7 from '../../assets/images/extincts/mammals/mammals7.jpg';
+import imageMammal8 from '../../assets/images/extincts/mammals/mammals8.PNG';
+import imageMammal9 from '../../assets/images/extincts/mammals/mammals9.PNG';
+
+import imageAmphibians2 from '../../assets/images/extincts/amphibians/amphibian2.jpg';
+import imageAmphibians3 from '../../assets/images/extincts/amphibians/amphibian3.jpg';
+import imageAmphibians5 from '../../assets/images/extincts/amphibians/amphibian5.PNG';
+import imageAmphibians6 from '../../assets/images/extincts/amphibians/amphibian6.jpg';
+import imageAmphibians7 from '../../assets/images/extincts/amphibians/amphibian7.jpg';
+import imageAmphibians8 from '../../assets/images/extincts/amphibians/amphibian8.jpg';
+import imageAmphibians9 from '../../assets/images/extincts/amphibians/amphibian9.PNG';
+import imageAmphibians10 from '../../assets/images/extincts/amphibians/amphibian10.jpeg';
+
+import imageReptiles1 from '../../assets/images/extincts/reptil/reptil1.PNG';
+import imageReptiles2 from '../../assets/images/extincts/reptil/reptil2.PNG';
+import imageReptiles3 from '../../assets/images/extincts/reptil/reptil3.PNG';
+import imageReptiles4 from '../../assets/images/extincts/reptil/reptile4.png';
+import imageReptiles5 from '../../assets/images/extincts/reptil/reptile5.PNG';
+import imageReptiles6 from '../../assets/images/extincts/reptil/reptile6.png';
+import imageReptiles7 from '../../assets/images/extincts/reptil/reptile7.PNG';
+import imageReptiles8 from '../../assets/images/extincts/reptil/reptile8.PNG';
+import imageReptiles9 from '../../assets/images/extincts/reptil/reptile9.PNG';
+import imageReptiles10 from '../../assets/images/extincts/reptil/reptile10.PNG';
+import imageReptiles11 from '../../assets/images/extincts/reptil/reptile11.jpg';
+import imageReptiles12 from '../../assets/images/extincts/reptil/reptile12.PNG';
+
+import imageFishes1 from '../../assets/images/extincts/fishes/fish1.PNG';
+import imageFishes2 from '../../assets/images/extincts/fishes/fish2.PNG';
+import imageFishes3 from '../../assets/images/extincts/fishes/fish3.PNG';
+import imageFishes4 from '../../assets/images/extincts/fishes/fish4.PNG';
+import imageFishes5 from '../../assets/images/extincts/fishes/fish5.PNG';
+import imageFishes6 from '../../assets/images/extincts/fishes/fish6.PNG';
+import imageFishes7 from '../../assets/images/extincts/fishes/fish7.PNG';
+import imageFishes8 from '../../assets/images/extincts/fishes/fish8.PNG';
+import imageFishes9 from '../../assets/images/extincts/fishes/fish9.PNG';
+
+const Fishes1={name:"Parras Characodon",year:"1900", image:imageFishes1};
+const Fishes2={name:"Phantom Shiner",year:"1996", image:imageFishes2};
+const Fishes3={name:"Charco Azul Pupfish",year:"1993", image:imageFishes3};
+const Fishes4={name:"Mexican Dace",year:"1983", image:imageFishes4};
+const Fishes5={name:"Chinese Paddlefish",year:"2005", image:imageFishes5};
+const Fishes6={name:"Coregonus nigripinnis",year:"1923", image:imageFishes6};
+const Fishes7={name:"Giant Atlas Barbel",year:"2001", image:imageFishes7};
+const Fishes8={name:"Long Jaw Tristramella",year:"1990", image:imageFishes8};
+const Fishes9={name:"Silver Trout",year:"1989", image:imageFishes9};
+const FishesCollection=[Fishes1,Fishes2,Fishes3,Fishes4,Fishes5,Fishes6,Fishes7,Fishes8,Fishes9];
+
+
+
+const Reptile1={name:"Christmas Island Whiptail-skink",year:"2014", image:imageReptiles1};
+const Reptile2={name:"Navassa Rhinoceros Iguana",year:"1960", image:imageReptiles2};
+const Reptile3={name:"Round Island Burrowing Boa",year:"1975", image:imageReptiles3};
+const Reptile4={name:"Pinta Giant Tortoise",year:"2012", image:imageReptiles4};
+const Reptile5={name:"Leiolopisma mauritiana",year:"1600", image:imageReptiles5};
+const Reptile6={name:"Rodrigues Day Gecko",year:"1917", image:imageReptiles6};
+const Reptile7={name:"Gunther's Dwarf Burrowing Skink",year:"1986", image:imageReptiles7};
+const reptile8={name:"Seychelles Mud Turtle",year:"1959", image:imageReptiles8};
+const Reptile9={name:"Tonga Ground Skink",year:"1996", image:imageReptiles9};
+const Reptile10={name:"Cape Verde Giant Skink",year:"2013", image:imageReptiles10};
+const Reptile11={name:"Floreana Giant Tortoise",year:"1850", image:imageReptiles11};
+const Reptile12={name:"Cylindraspis vosmaeri",year:"1820", image:imageReptiles12};
+const ReptileCollection=[Reptile1,Reptile2,Reptile3,Reptile4,Reptile5,Reptile6,Reptile7,reptile8,Reptile9,Reptile10,Reptile11,Reptile12];
+
+const Amphibian2={name:"Splendid Poison Frog",year:"2017", image:imageAmphibians2 }
+const Amphibian3={name:"Golden Toad",year:"2004", image:imageAmphibians3 }
+const Amphibian5={name:"Mountain Mist Frog",year:"1990", image:imageAmphibians5 }
+const Amphibian6={name:"Sharp Snouted Day Frog",year:"1994", image:imageAmphibians6 }
+const Amphibian7={name:"Craugastor myllomyllon",year:"2000", image:imageAmphibians7 }
+const Amphibian8={name:"Southern Gastric Brooding Frog",year:"2002", image:imageAmphibians8 }
+const Amphibian9={name:"Pass Stubfoot Toad",year:"1986", image:imageAmphibians9 }
+const Amphibian10={name:"Jalpa False Brook Salamander",year:"2019", image:imageAmphibians10 }
+const AmphibiansCollection=[Amphibian2,Amphibian3,Amphibian5,Amphibian6,Amphibian7,Amphibian8,Amphibian9,Amphibian10];
+
+const Mammal1={name:"Schomburgk's Deer",year:"1938", image:imageMammal1 }
+const Mammal2={name:"Caribbean Monk Seal",year:"1952", image:imageMammal2 }
+const Mammal3={name:"Bonin Pipistrelle",year:"2018", image:imageMammal3 }
+const Mammal4={name:"Japanese Sea Lion",year:"1974", image:imageMammal4 }
+const Mammal5={name:"White-footed Rabbit-rat",year:"1845", image:imageMammal5 }
+const Mammal6={name:"Thylacine",year:"1936", image:imageMammal6 }
+const Mammal7={name:"Bluebuck",year:"1800", image:imageMammal7 }
+const Mammal8={name:"Falklands Wolf",year:"1876", image:imageMammal8 }
+const Mammal9={name:"Cryptonanus ignitus",year:"1962", image:imageMammal9 }
+const MammalsCollection=[Mammal1,Mammal2,Mammal3,Mammal4,Mammal5,Mammal6,Mammal7,Mammal8,Mammal9]
 
 const Ave1={name:"Thick-billed Ground-dove",year:"1927", image:imageAve1 }
 const Ave2={name:"Labrador Duck",year:"1878", image:imageAve2 }
@@ -39,60 +128,9 @@ const Insect6={name:"Rocky Mountain Locust",year:"1902", image:imageInsect6 }
 const Insect7={name:"Volutine Stoneyian Tabanid Fly",year:"1892", image:imageInsect7 }
 const InsectsCollection=[Insect1,Insect2,Insect3,Insect4,Insect5,Insect6,Insect7]
 
-export{AveCollection,InsectsCollection}
-
-/*
-anfibios 10
-	https://www.iucnredlist.org/species/9023/3149101 Floreana Giant Tortoise, 1850, amphibians1
-	https://www.iucnredlist.org/species/55201/54344718  Splendid Poison Frog, 2017, amphibians2
-	https://www.iucnredlist.org/species/3172/54357699   Golden Toad, 2004, amphibians3
-	https://www.iucnredlist.org/species/6065/12391587   Cylindraspis vosmaeri, 1820, amphibians4
-	https://www.iucnredlist.org/species/12149/78434814  Mountain Mist Frog, 1990 amphibians5
-	https://www.iucnredlist.org/species/21529/78447380  Sharp Snouted Day Frog, 1994 amphibian6
-	https://www.iucnredlist.org/species/56782/54369332  Craugastor myllomyllon, 2000 amphibian7
-	https://www.iucnredlist.org/species/19475/78430533  Southern Gastric Brooding Frog, 2002 amphibian8
-	https://www.iucnredlist.org/species/54549/54358350  Pass Stubfoot Toad, 1986 amphibian9
-	https://www.iucnredlist.org/species/59376/54381158  Jalpa False Brook Salamander, 2019, amphibian10
-
-mamiferos 10
-	https://www.iucnredlist.org/species/4288/79818502   Schomburgk's Deer, 1938 mammal1
-	https://www.iucnredlist.org/species/13655/45228171  Caribbean Monk Seal, 1952 mammal2
-	https://www.iucnredlist.org/species/17365/22123157  Bonin Pipistrelle, 2018, mammal3
-
-	https://www.iucnredlist.org/species/41667/113089431 Japanese Sea Lion, 1974 mammal4
-	https://www.iucnredlist.org/species/5223/22450334   White-footed Rabbit-rat, 1845 mammals5
-	https://www.iucnredlist.org/species/21866/21949291  Thylacine,1936 mammals6
-	https://www.iucnredlist.org/species/10168/50188573  Bluebuck, 1800 mammals7
-	https://www.iucnredlist.org/species/6923/82310440   Falklands Wolf, 1876 mammals8
-	https://www.iucnredlist.org/species/41320/22177809  Cryptonanus ignitus, 1962, mammal9
+export{AveCollection,InsectsCollection,MammalsCollection,AmphibiansCollection,ReptileCollection,FishesCollection}
 
 
-reptiles 10
-	https://www.iucnredlist.org/species/178595/101749951  Christmas Island Whiptail-skink, 2014 reptile1
-	https://www.iucnredlist.org/species/173001/6955940    Navassa Rhinoceros Iguana, 1960, reptile2
-	https://www.iucnredlist.org/species/2864/13483086     Round Island Burrowing Boa, 1975, reptile3
-	https://www.iucnredlist.org/species/9017/217759270    Pinta Giant Tortoise, 2012 reptile4
-	https://www.iucnredlist.org/species/11410/166839636   Leiolopisma mauritiana, 1600 reptile5
-	https://www.iucnredlist.org/species/17432631/17432636 Rodrigues Day Gecko, 1917, reptile6
-	https://www.iucnredlist.org/species/44979051/197419111 Günther's Dwarf Burrowing Skink,1986 reptile7
-	https://www.iucnredlist.org/species/16527/97386102    Seychelles Mud Turtle,1959, reptile8
-	https://www.iucnredlist.org/species/21286/217760413   Tonga Ground Skink, 1996 reptile9
-	https://www.iucnredlist.org/species/13152363/217783334 Cape Verde Giant Skink, 2013,reptile10
-
-peces	8
-	https://www.iucnredlist.org/species/4530/3000349     Parras Characodon,1900, fish1
-	https://www.iucnredlist.org/species/14891/130025081  Phantom Shiner,1996, fish2
-	https://www.iucnredlist.org/species/6176/3107502     Charco Azul Pupfish,1993 fish3
-	https://www.iucnredlist.org/species/8432/3145753     Mexican Dace, 1983, fish4
-	https://www.iucnredlist.org/species/18428/146104283  Chinese Paddlefish, 2005, fish5
-	https://www.iucnredlist.org/species/5371/11124753    Coregonus nigripinnis, 1923 fish6
-	https://www.iucnredlist.org/species/60765/137272327  Giant Atlas Barbel, 2001, fish7
-	https://www.iucnredlist.org/species/61372/19010617   Long Jaw Tristramella, 1990, fish8
-	https://www.iucnredlist.org/species/19873/9089084    Silver Trout,1979 fish9
-	
-
-
-*/
 
 
 

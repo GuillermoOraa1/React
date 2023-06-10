@@ -14,7 +14,7 @@ const Searcher =({changeTaxonid,changeName})=>{
     var speciesList=[];
     
     const captureContent = async() => {
-        var name=document.getElementById("common_name").value;
+        var name=document.getElementById("searcher-common_name").value;
         if(name==="")document.getElementById("autocomplete-container").innerHTML="";
         if(name.length>3){
             fetch(`http://localhost:8000/animals/${name}`)
@@ -36,14 +36,10 @@ const Searcher =({changeTaxonid,changeName})=>{
                     var parent = document.getElementById("autocomplete-container");
                     parent.appendChild(inputName);
                 });
-                console.log(data);
                 
-                if(data[0].scientificName && data.length===1){
-                    document.getElementById("autocomplete-container").innerHTML="";
+                if(data.length===1){
                     document.getElementById("scientific_name_received").value=data[0].scientificName;
-                    console.log(data[0].scientificName);
-                    document.getElementById("common_name_received").value=data[0].name;
-                    
+                    document.getElementById("common_name_received").value=data[0].name;                    
                 }  
             });
         }   
@@ -55,9 +51,9 @@ const Searcher =({changeTaxonid,changeName})=>{
         event.preventDefault();
         const scientific_name_received=document.getElementById("scientific_name_received").value;
         const common_name_received=document.getElementById("common_name_received").value;
-        const name_writed=document.getElementById("common_name").value;
-        document.getElementById("common_name").value="";
+        const name_writed=document.getElementById("searcher-common_name").value;
         if(common_name_received===name_writed && name_writed!==""){
+            document.getElementById("searcher-common_name").value="";
             const scientific_name=scientific_name_received.replace(" ", "%20").toLowerCase();
             var url="http://apiv3.iucnredlist.org/api/v3/species/"+scientific_name+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";    
             try{
@@ -72,7 +68,8 @@ const Searcher =({changeTaxonid,changeName})=>{
                 setTaxonid("Error");
             }
         }else{
-            const scientificName_received=document.getElementById("common_name").value;
+            const scientificName_received=document.getElementById("searcher-common_name").value;
+            document.getElementById("searcher-common_name").value="";
             if(scientificName_received!==""){
                 const scientific_name2=scientificName_received.replace(" ", "%20").toLowerCase();
                 var url_scientific_name="http://apiv3.iucnredlist.org/api/v3/species/"+scientific_name2+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
@@ -102,7 +99,7 @@ const Searcher =({changeTaxonid,changeName})=>{
                 <input className="searcher-input" type="hidden" id="common_name_received" size="35"/>
                 <input className="searcher-input" type="hidden" id="scientific_name_received" size="35"/>
                 <div className="input-container">
-                    <input className="searcher-input" type="text" name="scientific_name" id="common_name" size="35" onChange={captureContent}/>
+                    <input className="searcher-input" type="text" name="scientific_name" id="searcher-common_name" size="35" onChange={captureContent}/>
                     <div id="autocomplete-container"></div>
                 </div>
                 <button type="submit" className="searcher-button"><img src={iconSearch} alt="icon search" width="30px" height="22px"/></button>
