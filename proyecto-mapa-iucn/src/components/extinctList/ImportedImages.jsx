@@ -129,13 +129,3 @@ const Insect7={name:"Volutine Stoneyian Tabanid Fly",year:"1892", image:imageIns
 const InsectsCollection=[Insect1,Insect2,Insect3,Insect4,Insect5,Insect6,Insect7]
 
 export{AveCollection,InsectsCollection,MammalsCollection,AmphibiansCollection,ReptileCollection,FishesCollection}
-
-
-
-
-
-
-
-
-
-

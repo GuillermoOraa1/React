@@ -1,16 +1,228 @@
-
-  .species-threats {
-    padding: 20px;
-    color: #333;
+/* 
+  
+   .species-threats {
+    margin-top: 20px;
   }
   
-  .species-threats h2 {
-    font-size: 1.5em;
+  h2 {
+    font-size: 20px;
     margin-bottom: 10px;
   }
   
-  .species-threats p {
-    line-height: 1.5;
-    color: #666;
+  .threats-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
   }
   
+  .threat-item {
+    width: 33.33%;
+    padding: 5px;
+  }
+  
+  .threat-item p {
+    cursor: pointer;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0;
+  }
+  
+  .selected-threat {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+  }
+  
+  .selected-threat h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .threat-details {
+    margin-top: 10px;
+  }
+  
+  .dropdown-container {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .dropdown-button {
+    cursor: pointer;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+  }
+  
+  .dropdown-content {
+    display: block;
+    margin-top: 5px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .dropdown-item {
+    margin-bottom: 5px;
+  }
+  
+  .dropdown-item p {
+    cursor: pointer;
+    margin: 0;
+    padding: 5px;
+    background-color: #f0f0f0;
+  }
+  
+  .population-line-red {
+    height: 1px;
+    background-color: red;
+    margin-bottom: 1rem;
+  }
+  
+  .population-line-gray {
+    height: 1px;
+    background-color: gray;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  } */
+
+  /* ---------- */
+  .species-threats {
+  margin-top: 20px;
+}
+
+h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.threats-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.threat-item {
+  width: %;
+  padding: 5px;
+}
+
+.threat-item p {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 8px;
+  border-radius: 5px;
+  margin: 0;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.threat-item p:hover {
+  color: white;
+  background-color: #ff0000;
+  /* Agrega cualquier otro estilo adicional para el efecto hover */
+}
+
+.selected-threat {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.selected-threat h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.threat-details {
+  margin-top: 10px;
+}
+
+.dropdown-container {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.dropdown-button {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 12px;
+}
+
+.dropdown-content {
+  display: block;
+  margin-top: 5px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.dropdown-item {
+  margin-bottom: 5px;
+}
+
+.dropdown-item p {
+  cursor: pointer;
+  margin: 0;
+  padding: 5px;
+  background-color: #f0f0f0;
+}
+
+.population-line-red,
+.population-line-gray {
+  height: 1px;
+  margin-bottom: 1rem;
+}
+
+.habitat-info-container {
+  margin-top: 20px;
+}
+
+.habitat-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.habitat-info {
+  margin-top: 10px;
+}
+
+/* Modificaciones para el diseño responsive */
+@media (min-width: 393px) {
+  h2 {
+    font-size: 18px;
+  }
+
+  .selected-threat h3 {
+    font-size: 18px;
+  }
+
+  .dropdown-button {
+    font-size: 14px;
+  }
+
+  .habitat-title {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 786px) {
+  .threats-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .threat-item {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    margin-right: 10px;
+  }
+}

@@ -74,6 +74,8 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
         for (const ruta of rutas) {
             const registro=await fetchDataBySpecie(ruta);
             if(registro!==null){
+                //console.log(registro);
+                //console.log("xxx4");
                 respuesta.push(registro);
             }
         }
@@ -107,7 +109,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 }else{
                   fetch("http://localhost:8000/animals/"+nombreParaBuscarImagen.toLowerCase()+"/"+nombreParaBuscarImagen.toLowerCase());
                 }
-                
 
                 registro={taxonid:result[0].taxonid,clase:result[0].class,nombreComun:nombrecomun,
                     nombreCientifico:result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0],
@@ -461,7 +462,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 controlDiv.innerHTML=`
                 <div class="loadingData">
                   <p>Our little chameleon<br>is looking for....</p>
-                  <img src=${imagenLoadingData} alt="Chameleon looking for data" width=80px height=70px/>
+                  <img src=${imagenLoadingData} alt="Chameleon looking for data" width=120px height=110px/>
                 </div>
                 `;
                 controlDiv.style.width='35%';

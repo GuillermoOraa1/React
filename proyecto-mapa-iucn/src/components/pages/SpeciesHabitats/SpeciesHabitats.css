@@ -1,15 +1,92 @@
 .species-habitats {
-    padding: 20px;
-    color: #333;
+  padding: 20px;
+  color: #333;
+}
+
+.species-habitats h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.species-habitats p {
+  line-height: 1.5;
+  color: #666;
+}
+
+.habitats-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+
+.habitat-item {
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+.habitat-info {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.population-line-red {
+  height: 1px;
+  background-color: red;
+  margin-bottom: 1rem;
+}
+
+.population-line-gray {
+  height: 1px;
+  background-color: gray;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.population-title {
+  margin-bottom: 10px;
+}
+
+.population-title button {
+  margin-right: 5px;
+}
+
+.population-info {
+  margin-top: 10px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.no-info {
+  margin-top: 10px;
+  color: red;
+}
+
+@media (max-width: 440px) {
+  .habitats-container {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .species-habitats h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+
+  .population-line-gray {
+    margin-top: 0;
   }
-  
-  .species-habitats p {
-    line-height: 1.5;
-    color: #666;
+
+  .species-habitats {
+    padding: 10px;
   }
-  
+
+  .habitats-container,
+  .habitat-item,
+  .habitat-info,
+  .population-info {
+    font-size: 12px;
+    padding: 2px;
+  }
+
+  .habitat-item:nth-child(even),
+  .habitat-info:nth-child(even) {
+    font-size: 12px;
+    /* padding: -1px; */
+  }
+}

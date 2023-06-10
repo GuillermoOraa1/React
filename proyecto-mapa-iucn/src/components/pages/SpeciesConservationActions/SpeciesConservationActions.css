@@ -1,14 +1,85 @@
- .species-conservation-actions {
-    padding: 20px;
+.species-conservation-actions {
+  padding: 20px;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  border-bottom: 1px dotted #000;
+  border-right: none;
+  border-left: none;
+}
+
+.table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  border-top: 1px solid #000;
+}
+
+.table td {
+  transition: transform 0.2s;
+}
+
+.table tr:hover td {
+  transform: scale(1.02);
+}
+
+.table-cell {
+  flex-basis: 50%;
+  padding: 5px;
+}
+
+.convervation-info-container {
+  margin-top: 20px;
+}
+
+.convervation-info-container .conservation-title {
+  margin-bottom: 10px;
+}
+
+.convervation-info-container .conservation-info {
+  border: 1px solid #000;
+  padding: 10px;
+}
+
+/* Estilos para pantallas de 393x786 */
+@media (max-width: 393px) {
+  .species-conservation-actions {
+    padding: 10px;
   }
   
-  .list-group-item {
-    border: none;
+  .table th,
+  .table td {
+    padding: 6px;
   }
   
-  @media (max-width: 768px) {
-    .species-conservation-actions {
-      padding: 10px;
-    }
+  .convervation-info-container {
+    margin-top: 15px;
+  }
+}
+
+@media (max-height: 786px) {
+  .species-conservation-actions {
+    padding: 15px;
   }
   
+  .table th,
+  .table td {
+    padding: 7px;
+  }
+  
+  .convervation-info-container {
+    margin-top: 25px;
+  }
+}

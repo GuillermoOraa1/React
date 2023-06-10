@@ -1,4 +1,4 @@
-.species-summary {
+/* .species-summary {
     padding: 20px;
     color: #333;
   }
@@ -11,5 +11,68 @@
   .species-summary p {
     line-height: 1.5;
     color: #666;
+  }
+  
+  .population-line-red {
+    height: 1px;
+    background-color: red;
+    margin-bottom: 1rem;
+  }
+  
+  .population-line-gray {
+    height: 1px;
+    background-color: gray;
+    margin-bottom: 1rem;
+  }
+  .population-title button {
+    font-size: 17px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  } */
+
+  .species-summary {
+    padding: 20px;
+    color: #333;
+  }
+  
+  .species-summary h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    padding-left: 100px
+  }
+  
+  .species-summary p {
+    line-height: 1.5;
+    color: #666;
+    padding: 15px
+  }
+  
+  .population-line-red {
+    height: 1px;
+    background-color: red;
+    margin-bottom: 1rem;
+  }
+  
+  .population-line-gray {
+    height: 1px;
+    background-color: gray;
+    margin-bottom: 1rem;
+  }
+  
+  .population-title button {
+    font-size: 17px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 440px) {
+    .species-summary {
+      padding: 10px !important;
+    }
+  
+    .population-title button {
+      font-size: 14px !important;
+      margin-right: 0.3rem !important;
+    }
   }
   

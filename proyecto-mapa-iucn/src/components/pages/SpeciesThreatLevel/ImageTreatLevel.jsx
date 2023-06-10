@@ -74,7 +74,7 @@ const SpeciesImagen = ({ speciesId }) => {
     <div>
       {loading ? (
         <div>
-          <h2>Cargando datos...</h2>
+          <h2>Loading information...</h2>
           {/* <CircularProgress /> */}
         </div>
       ) : (

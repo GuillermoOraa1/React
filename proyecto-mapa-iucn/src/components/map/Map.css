@@ -3,15 +3,15 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top:1%;
+    margin-top: 2rem;
     margin-bottom:1%;
-    /* background-color:rgba(76,75,74,0.9); */
 }
 .contenedor{
     /* width:98%; */
     height:605px;
     width:1220px;
     border: solid 3px black;
+    /* margin-top: 1rem; */
 }
 .mapa{
     /*height: 800px;*/
@@ -84,6 +84,7 @@
     width:1220px;
     display:inline-flex;
     align-content:left;
+    margin-bottom:0.2rem;
 }
 
 #select-region-id{
@@ -145,7 +146,7 @@
 /*style del loading data control*/
 
 .cargandoDatos{
-    padding-top:4rem;
+    padding-top:1rem;
 }
 
 .loadingData{

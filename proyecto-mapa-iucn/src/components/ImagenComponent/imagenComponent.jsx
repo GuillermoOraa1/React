@@ -1,26 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-/* const ComponenteImagen = ({id})=>{
-  const [login, setLoading] = useState(false);
-  const [datos, setDatos] = useState([]);
-  useEffect(() => {
-    if(id){
-      setLoading(true);
-      fetch("http://localhost:8000/photo/"+id)
-      .then((res) => res.json())
-      .then((data) => {
-        setDatos(data.photo);
-        setLoading(false);
-      });
-    }
-  }, [id]); 
-  return(
-    <>
-        {!login && datos.map((value,key) => (<img src={value} key={key} alt="imagenBicho" width='100px' height='100px'/>))}
-    </>
-  );
-} */
-
+import './imagenComponent.css';
 const ComponenteImagen = ({id,name,open})=>{
     const [url, setUrl] = useState("");
     const [loading, setLoading] = useState(false);
@@ -44,8 +23,8 @@ const ComponenteImagen = ({id,name,open})=>{
 
     return(
     <>
-        {loading && <p>Cargando imagen...</p>}
-        {!loading && id &&(<img src={url} alt="" onClick={() => open(true)} />)}
+        {loading && <p>Loading information...</p>}
+        {!loading && id &&(<img src={url} alt="" onClick={() => open(true)} className="imagen"/>)}
     </>
     );
 }

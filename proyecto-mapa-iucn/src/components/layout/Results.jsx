@@ -4,6 +4,7 @@ import SpeciesInfo from "../pages/SpeciesInfo/SpeciesInfo";
 import SpeciesConservationActions from "../pages/SpeciesConservationActions/SpeciesConservationActions";
 import SpeciesHabitats from "../pages/SpeciesHabitats/SpeciesHabitats";
 import SpeciesSummary from "../pages/SpeciesSummary/SpeciesSummary";
+import SpeciesPopulation from "../pages/SpeciesPopulation/SpeciesPopulation";
 import SpeciesThreats from "../pages/SpeciesThreats/SpeciesThreats";
 import ImageTreatLevel from "../pages/SpeciesThreatLevel/ImageTreatLevel";
 
@@ -22,11 +23,24 @@ function Results({taxonid, name}) {
               <AmplifiedImages name={name} handleClose={() => setIsOpen(false)} isOpen={isOpen}/>
               <SpeciesInfo speciesId={taxonid}/>
             </div>
-            <ImageTreatLevel speciesId={taxonid} />
-            <SpeciesSummary speciesId={taxonid} />
-            <SpeciesHabitats speciesId={taxonid} />
-            <SpeciesThreats speciesId={taxonid} />
-            <SpeciesConservationActions speciesId={taxonid} />
+            <div className="species-container">
+              <ImageTreatLevel speciesId={taxonid} />
+              <div className="bordered-component">
+                <SpeciesSummary speciesId={taxonid} />
+              </div>
+              <div className="bordered-component">
+                <SpeciesPopulation speciesId={taxonid} />
+              </div>
+              <div className="bordered-component">
+                <SpeciesHabitats speciesId={taxonid} />
+              </div>
+              <div className="bordered-component">
+                <SpeciesThreats speciesId={taxonid} />
+              </div>
+              <div className="bordered-component">
+                <SpeciesConservationActions speciesId={taxonid} />
+              </div>
+            </div>
 
           </>
         }

@@ -16,3 +16,26 @@
     height:300px;
     padding-top:20px;
 }
+.info-container img{
+    width:40%;
+    height:300px;
+    padding-top:20px;
+}
+
+.species-container {
+    background-color: white;
+    border: 1.3rem solid gray;
+  }
+
+  .bordered-component {
+    border-bottom: 1.3rem solid gray;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .bordered-component:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  

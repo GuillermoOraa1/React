@@ -1,6 +1,5 @@
 import React, { useState} from 'react';
 import { useNavigate } from "react-router-dom";
-//import rightHamster from "../../assets/images/searcher/hamster.PNG";
 import rightnutria from "../../assets/images/searcher/nutria.PNG";
 import leftFox from "../../assets/images/searcher/fox.PNG";
 import iconSearch from "../../assets/images/searcher/searcher_icon.png";
@@ -12,6 +11,19 @@ const Searcher =({changeTaxonid,changeName})=>{
     const navigate = useNavigate();
 
     var speciesList=[];
+
+    const selectedName=(commonName, data)=>{
+        
+        //console.log(data);
+        data.forEach(item => {
+            if(item.name===commonName){
+                document.getElementById("scientific_name_received").value=item.scientificName;
+                document.getElementById("common_name_received").value=item.name;
+                document.getElementById("searcher-common_name").value=item.name;
+            }
+        });
+        document.getElementById("autocomplete-container").innerHTML="";
+    }
     
     const captureContent = async() => {
         var name=document.getElementById("searcher-common_name").value;
@@ -32,6 +44,8 @@ const Searcher =({changeTaxonid,changeName})=>{
                     let inputName = document.createElement("input");
                     inputName.setAttribute('type', 'text');
                     inputName.setAttribute('class', 'searcher-input-in-container');
+                    //inputName.setAttribute("onClick",selectedName(item,data));
+                    inputName.addEventListener('click', () => selectedName(item, data));
                     inputName.setAttribute('value', item);
                     var parent = document.getElementById("autocomplete-container");
                     parent.appendChild(inputName);

@@ -50,9 +50,14 @@
     .rrss-icons{
         display:inline-flex;
         flex-direction:column;
+        margin-right:0.5rem;
     }
 
     .rrss-icons a{
         margin-top:1.5em;
+    }
+
+    .rrss p{
+        padding-left:unset; 
     }
 }

@@ -2,7 +2,7 @@
     background-color:#DA2A1C;
     color: #FFF;
     font-family: 'roboto';
-    margin-top:1rem;
+    margin-top:0.2rem;
     margin-bottom:1rem;
 }
 #title{
@@ -13,10 +13,4 @@
 .css-ta95xa-MuiImageListItem-root .MuiImageListItem-img{
     object-fit:fill !important;
     height:174px !important;
-}
-
-@media (max-width:360px){
-    .extinctList-container{
-        display:none !important;
-    }
 }

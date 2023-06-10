@@ -52,7 +52,7 @@ const AmplifiedImagesComponent = ({name, isOpen, handleClose})=>{
             {!loading && datos.map((item,index) => (
                   <div key={index} className={index===indiceImagen?"slide active":"slide"}>
                     {/* Si la key de la imagen es igual al indiceImagen que hay en ese momento, se mostrara esa imagen */}
-                    {index===indiceImagen && (<img className="animalImage" src={item} key={index} alt="imagenBicho" width='500px' height='480px'/>)} 
+                    {index===indiceImagen && (<img className="animalImage" src={item} key={index} alt="Error dont recovered" width='500px' height='480px'/>)} 
                   </div>      
             ))}
           <input className="arrow-right" src={arrowL} type="image" alt="left arrow" onClick={siguienteImagen} />

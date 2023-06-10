@@ -1,8 +1,41 @@
 .image-container {
-    display: flex;
-    justify-content: center;
-  }
-  
+  display: flex;
+  justify-content: center;
+  margin-left: 350px;
+}
+
 .centered-image {
-    margin-left: 15px; 
+  width: 9000px;
+  height: 150px;
+}
+
+/* .info-container {
+  padding: 20px;
+} */
+
+@media (max-width: 440px) {
+  .image-container {
+    margin-left: 0 !important;
+    margin-bottom: 20px !important;
   }
+
+  .centered-image {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  .info-container {
+    padding: 10px !important;
+  }
+  .image-container,
+  .centered-image,
+  .info-container {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 394px) {
+  .centered-image {
+    margin-left: 15px !important;
+  }
+}

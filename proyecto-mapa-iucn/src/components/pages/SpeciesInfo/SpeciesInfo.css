@@ -12,14 +12,7 @@
   font-size: 1.1rem;
   line-height: 1.6;
 }
-
-.species-button{
-  background: transparent;
-  border-radius: 6px;
-  text-decoration: none;
-}
-
-.redLine {
+.separatorRojo {
   width: 100%;
   height: 2px;
   background-color:#DA2A1C;
@@ -27,10 +20,16 @@
   margin: 10px 0;
 }
 
-.greyLine {
+.separatorGris {
   width: 100%;
   height: 2px;
   background-color:	#808080;
   border: none;
   margin: 10px 0;
+}
+
+.species-button{
+  background: transparent;
+  border-radius: 6px;
+  text-decoration: none;
 }
