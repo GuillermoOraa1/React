@@ -26,7 +26,6 @@ const SpeciesThreats = ({ speciesId }) => {
         const response = await axios.get(
           `http://apiv3.iucnredlist.org/api/v3/species/narrative/id/${speciesId}?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee`
         );
-        //console.log(response.data.result[0].threats); // Agregar esta línea
         setThreatInfo(response.data.result[0].threats);
       } catch (error) {
         console.error('Error al obtener la información de amenaza:', error);

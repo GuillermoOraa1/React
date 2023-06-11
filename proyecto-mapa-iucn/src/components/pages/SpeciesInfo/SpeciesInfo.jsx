@@ -27,7 +27,7 @@ const SpeciesInfo = ({ speciesId }) => {
         {speciesData &&
         <>
           <h2>{speciesData.scientific_name}</h2>
-          <hr className="redLine" /> {/* Añade esta línea */}
+          <hr className="redLine" /> 
           <p>{speciesData.main_common_name}</p>
           <hr className="greyLine" />
           <p><strong>Status:</strong> {speciesData.category}</p>

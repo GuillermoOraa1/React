@@ -7,14 +7,11 @@
     margin-bottom:1%;
 }
 .contenedor{
-    /* width:98%; */
     height:605px;
     width:1220px;
     border: solid 3px black;
-    /* margin-top: 1rem; */
 }
 .mapa{
-    /*height: 800px;*/
     height: 600px !important;
     width: 100%;
 }

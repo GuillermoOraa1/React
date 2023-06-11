@@ -19,8 +19,6 @@
 .rrss{
     display:inline-flex;
     flex-direction: column;
-    /* line-height:0.05rem; */
-    /* background-color:blue; */
     font-size:0.7rem;
 }
 

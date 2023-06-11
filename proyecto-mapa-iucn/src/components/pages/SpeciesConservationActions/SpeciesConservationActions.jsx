@@ -56,59 +56,6 @@ const SpeciesConservationActions = ({ speciesId }) => {
 
   const sortedConservationActions = sortConservationActions(conservationActions);
 
-  // return (
-  //   <div>
-  //     <h2>Conservation Actions Needed</h2>
-  //     <table>
-  //       <thead>
-  //         <tr>
-  //           <th>Code</th>
-  //           <th>Notes</th>
-  //         </tr>
-  //       </thead>
-  //       <tbody>
-  //         {sortedConservationActions.map((action, index) => (
-  //           <tr key={index}>
-  //             <td>{action.code}</td>
-  //             <td>{action.title}</td>
-  //           </tr>
-  //         ))}
-  //       </tbody>
-  //     </table>
-
-  //     <div className='convervation-info-container'>
-  //       <h3 className='conservation-title'>
-  //       <button onClick={toggleConservationInfo}>{isConservationInfoOpen ? '▲' : '▼'}</button>Conservation Actions in detail
-  //      </h3>
-  //      {isConservationInfoOpen && (<div className='conservation-info'>{parse(conservationMeasures)}</div>)}
-  //     </div>
-  //   </div>
-  // );
-// return (
-//   <div>
-//     <h2>Conservation Actions Needed</h2>
-//     <div className="conservation-actions-table">
-//       {sortedConservationActions.map((action, index) => (
-//         <div key={index} className="table-row">
-//           <div className="table-cell">{action.code}</div>
-//           <div className="table-cell">{action.title}</div>
-//         </div>
-//       ))}
-//     </div>
-
-//     <div className="convervation-info-container">
-//       <h3 className="conservation-title">
-//         <button onClick={toggleConservationInfo}>
-//           {isConservationInfoOpen ? "▲" : "▼"}
-//         </button>
-//         Conservation Actions in detail
-//       </h3>
-//       {isConservationInfoOpen && (
-//         <div className="conservation-info">{parse(conservationMeasures)}</div>
-//       )}
-//     </div>
-//   </div>
-// );
 return (
   <div>
     <h2>Conservation Actions Needed</h2>

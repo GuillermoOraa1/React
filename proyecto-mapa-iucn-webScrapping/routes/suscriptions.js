@@ -19,7 +19,7 @@ app.post("/", async (req, res) => {
             });
     res.status(200).json({ success: true, message: "Contact added to list successfully!" });
   }catch (error) {
-    console.error("Error adding contact to list:", error);
+    console.error("Error adding contact to list:", error.message);
     res.status(500).json({ success: false, message: "An error occurred while adding contact to list." });
   }
 });   

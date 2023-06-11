@@ -13,8 +13,6 @@ const Searcher =({changeTaxonid,changeName})=>{
     var speciesList=[];
 
     const selectedName=(commonName, data)=>{
-        
-        //console.log(data);
         data.forEach(item => {
             if(item.name===commonName){
                 document.getElementById("scientific_name_received").value=item.scientificName;
@@ -44,7 +42,6 @@ const Searcher =({changeTaxonid,changeName})=>{
                     let inputName = document.createElement("input");
                     inputName.setAttribute('type', 'text');
                     inputName.setAttribute('class', 'searcher-input-in-container');
-                    //inputName.setAttribute("onClick",selectedName(item,data));
                     inputName.addEventListener('click', () => selectedName(item, data));
                     inputName.setAttribute('value', item);
                     var parent = document.getElementById("autocomplete-container");
@@ -89,7 +86,6 @@ const Searcher =({changeTaxonid,changeName})=>{
                 var url_scientific_name="http://apiv3.iucnredlist.org/api/v3/species/"+scientific_name2+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
                 try{
                     const response = await fetch(url_scientific_name);
-                    //if(response.status>=400) throw new Error('Something went wrong');
                     const data = await response.json();
                     const {result}=data;
                     changeTaxonid(result[0].taxonid);

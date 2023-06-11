@@ -87,6 +87,5 @@
   .habitat-item:nth-child(even),
   .habitat-info:nth-child(even) {
     font-size: 12px;
-    /* padding: -1px; */
   }
 }

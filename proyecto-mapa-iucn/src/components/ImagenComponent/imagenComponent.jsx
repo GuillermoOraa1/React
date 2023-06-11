@@ -23,7 +23,7 @@ const ComponenteImagen = ({id,name,open})=>{
 
     return(
     <>
-        {loading && <p>Loading information...</p>}
+        {loading && <p>Loading gallery...</p>}
         {!loading && id &&(<img src={url} alt="" onClick={() => open(true)} className="imagen"/>)}
     </>
     );

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {useLocation} from "react-router-dom";
 import {Stack, ImageList, ImageListItem, ImageListItemBar, Collapse, Grow} from '@mui/material';
 import {AveCollection,InsectsCollection,MammalsCollection,AmphibiansCollection,ReptileCollection,FishesCollection} from './ImportedImages';
-//import blackRibbon from '../../assets/images/extincts/blackRibbon.png'
 import './extinctList.css';
 
 const ExtinctList =({focus, family})=>{
@@ -35,9 +34,9 @@ const ExtinctList =({focus, family})=>{
                 <Stack spacing={4}>
                 <Grow in={focus} timeout={2000}>
                 <ImageList sx={{ width: "100%", paddingLeft:"40px", paddingRight:"40px" }} cols={4}>
-                    {randomImages.map((animal) => (
-                    <ImageListItem key={animal.nombre}>
-                        <img src={animal.image} alt={animal.name} width="54px" height="154px" loading="lazy" objectFit="fill"/>
+                    {randomImages.map((animal,index) => (
+                    <ImageListItem key={index}>
+                        <img src={animal.image} alt={animal.name} width="54px" height="154px" loading="lazy" objectfit="fill"/>
                         <ImageListItemBar title={animal.name} subtitle={`Extinghised in ${animal.year}`}/> 
                     </ImageListItem>
                     ))}

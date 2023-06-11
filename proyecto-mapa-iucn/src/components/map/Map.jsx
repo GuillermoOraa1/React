@@ -74,8 +74,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
         for (const ruta of rutas) {
             const registro=await fetchDataBySpecie(ruta);
             if(registro!==null){
-                //console.log(registro);
-                //console.log("xxx4");
                 respuesta.push(registro);
             }
         }
@@ -92,9 +90,7 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
             if(result[0].class==="MAMMALIA" || result[0].class==="AMPHIBIA" || 
             result[0].class==="REPTILIA" || result[0].class==="INSECTA" ||
             result[0].class==="AVES" || result[0].class==="ACTINOPTERYGII") {
-                /* if (result[0].scientific_name !=null){
-                    nombrecientifico=result[0].scientific_name.toLowerCase().replace(" ","-").split(" ")[0]
-                }else {nombrecientifico="";} */
+
                 if (result[0].main_common_name !=null){
                     nombrecomun=result[0].main_common_name;
                 }else {
@@ -238,11 +234,9 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
               mostrarChargingAnimalsDataControl(true);
               consultarEspeciespais(codigoPais)
               .then((especiesPais)=>{
-                  //console.log("xxx3");
                   consultarDatosEspecies(especiesPais)
                   .then((response)=>{
                       var datosEspecie=response; //ESTA ES LA RESPUESTA CON LOS DATOS DE LAS ESPECIES DEL PAIS
-                      //console.log(datosEspecie);
                       let lat=pais.coordinates[0];
                       let long=pais.coordinates[1];
                       var point1 = omap.latLngToLayerPoint([lat, long]);
@@ -251,21 +245,14 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                       var estilo=getComputedStyle(mapa2);
                       var altura=Math.round(parseInt(estilo.height));
                       var anchura=Math.round(parseInt(estilo.width));
-                      //var rBase=210; 
                       var rBase=340;
                       var center = point1;
                       if(datosEspecie.length>8){
                         point1 = point1.add(L.point(0, -180))
                       }
-                      //point1 = point1.add(L.point(130, 0));
                       let xspan = anchura / (anchura + altura);
                       let yspan = altura / (anchura + altura);
                       for (let i = 0; i < datosEspecie.length; i++) {
-                          //let asymptoticExpansion = 1.2; // expansion al infinito
-                          //let initialExpansion = 17;
-                          //let globalExpansion = 18; // asintotica * global debe quedar mas o menos constante
-                          //rho = globalExpansion * i * (asymptoticExpansion + initialExpansion/(1 + i));
-                          //point1 = point1.add(L.point(xspan*rho*Math.cos(i), yspan*rho*Math.sin(i)));
                           if(datosEspecie.length<=8){
                             let x = rBase*(1+Math.trunc(i/8))*Math.cos(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*xspan ;
                             let y = rBase*(1+Math.trunc(i/8))*Math.sin(Math.trunc(i/8)*0.0+(i%8)*Math.PI/4)*yspan;
@@ -281,7 +268,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                           
                           var latLong= omap.layerPointToLatLng(point1);
                           var imagenIcono=datosEspecie[i]["url"];
-                          //var imagenIcono="https://wir.iucnredlist.org/"+datosEspecie[i]["nombreCientifico"]+".jpg";
                           var myIcon = L.icon({
                               iconUrl: imagenIcono,
                               iconSize: [48, 45],
@@ -293,7 +279,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                               className: 'image'
                           });
                           let marcador= L.marker(latLong,{icon: myIcon,alt: ""});
-                          //let nombreComun=datosEspecie[i]["nombreComun"];
                           marcador.bindPopup(
                 
                             L.popup().setContent(
@@ -466,14 +451,8 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
                 </div>
                 `;
                 controlDiv.style.width='35%';
-                //controlDiv.style.height='20px';
                 controlDiv.style.backgroundColor='transparent';
                 controlDiv.style.textAlign='center';
-                //controlDiv.style.border='3px solid green';
-                //controlDiv.style.borderRadius='16px';
-                //controlDiv.style.marginLeft='20%';
-                //controlDiv.style.marginRight='20%';
-                //controlDiv.style.marginTop='0px';
                 return controlDiv;
             },
 
@@ -502,7 +481,6 @@ const RefMap = ({changeIdAnimal,changeNameAnimal}) => {
           //ACCIONES QUE PASAN CUANDO PINCHAS EN EL BOTON DEL POPUP DEL BICHO
           window.clicSobreImagen = (numero, nombre) => {
             omap.closePopup();
-            //nombre="Coryphaenoides rupestris";
             changeIdAnimal(numero);
             changeNameAnimal(nombre);
             const section = document.getElementById('speciesInfo');

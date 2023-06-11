@@ -1,103 +1,10 @@
-/* 
-  
-   .species-threats {
-    margin-top: 20px;
-  }
-  
-  h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .threats-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-  
-  .threat-item {
-    width: 33.33%;
-    padding: 5px;
-  }
-  
-  .threat-item p {
-    cursor: pointer;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 0;
-  }
-  
-  .selected-threat {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-  }
-  
-  .selected-threat h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .threat-details {
-    margin-top: 10px;
-  }
-  
-  .dropdown-container {
-    margin-top: 20px;
-    text-align: right;
-  }
-  
-  .dropdown-button {
-    cursor: pointer;
-    background-color: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: 12px;
-  }
-  
-  .dropdown-content {
-    display: block;
-    margin-top: 5px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  .dropdown-item {
-    margin-bottom: 5px;
-  }
-  
-  .dropdown-item p {
-    cursor: pointer;
-    margin: 0;
-    padding: 5px;
-    background-color: #f0f0f0;
-  }
-  
-  .population-line-red {
-    height: 1px;
-    background-color: red;
-    margin-bottom: 1rem;
-  }
-  
-  .population-line-gray {
-    height: 1px;
-    background-color: gray;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  } */
-
-  /* ---------- */
-  .species-threats {
-  margin-top: 20px;
-}
-
 h2 {
   font-size: 16px;
   margin-bottom: 10px;
+}
+
+.species-threats {
+  margin-top: 20px;
 }
 
 .threats-container {
